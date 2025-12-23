@@ -98,6 +98,18 @@ body {
     width: 95%;
     padding: 20px;
   }
+.board {
+  position: relative;
+}
+
+#winLine {
+  position: absolute;
+  height: 6px;
+  background: #2e7d32;
+  border-radius: 5px;
+  display: none;
+  transform-origin: left center;
+}
 
   .board {
     grid-template-columns: repeat(3, 90px);
@@ -108,4 +120,5 @@ body {
     height: 90px;
   }
 }
+
 
