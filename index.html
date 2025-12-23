@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0d6efd">
+  <meta name="theme-color" content="#0d6efd">
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tic Tac Toe - Michael</title>
   <link rel="stylesheet" href="michael.css" />
 </head>
+
 <body>
   <div class="wrapper">
     <h1 class="title">💜 Michael's Tic Tac Toe</h1>
@@ -39,19 +40,20 @@
     <p class="status" id="status">Player X’s turn</p>
   </div>
 
-  <script src="michael.js"></script>
-  <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js");
-  }
-</script>
-  <audio id="clickSound" src="click.mp3"></audio>
-<audio id="winSound" src="win.mp3"></audio>
-<audio id="drawSound" src="draw.mp3"></audio>
+  <!-- 🔊 AUDIO MUST COME FIRST -->
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+  <audio id="winSound" src="win.mp3" preload="auto"></audio>
+  <audio id="drawSound" src="draw.mp3" preload="auto"></audio>
 
+  <!-- 🧠 GAME LOGIC -->
+  <script src="michael.js"></script>
+
+  <!-- ⚙️ SERVICE WORKER -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
 
 </body>
 </html>
-
-
-
