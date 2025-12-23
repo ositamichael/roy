@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Tic Tac Toe">
 
-  <!-- Icons -->
+  <!-- Icons / PWA -->
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.json">
 
@@ -22,9 +22,7 @@
 <body>
 
   <!-- Splash Screen -->
-  <div id="splash">
-    💜 Michael’s Tic Tac Toe
-  </div>
+  <div id="splash">💜 Michael’s Tic Tac Toe</div>
 
   <!-- App -->
   <div class="wrapper">
@@ -56,21 +54,14 @@
     <p class="status" id="status">Player X’s turn</p>
   </div>
 
-  <!-- 🔊 Sounds (FILENAMES MATCH YOUR REPO) -->
-  <audio id="bgSound" src="click.mp3.wav" loop></audio>
-  <audio id="clickSound" src="click.mp3.wav"></audio>
-  <audio id="winSound" src="win.mp3.wav"></audio>
-  <audio id="drawSound" src="draw.mp3.wav"></audio>
+  <!-- 🔊 Sounds (MATCH YOUR FILES EXACTLY) -->
+  <audio id="bgSound" src="click.wav" loop></audio>
+  <audio id="clickSound" src="click.wav"></audio>
+  <audio id="winSound" src="win.wav"></audio>
+  <audio id="drawSound" src="draw.wav"></audio>
 
   <!-- JS -->
   <script src="michael.js"></script>
-
-  <!-- Service Worker -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
-    }
-  </script>
 
 </body>
 </html>
