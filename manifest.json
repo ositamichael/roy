@@ -139,3 +139,19 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
+
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    // hide splash
+    const splash = document.getElementById("splash");
+    if (splash) splash.classList.add("hidden");
+
+    // start background sound
+    const bgSound = document.getElementById("bgSound");
+    if (bgSound) {
+      bgSound.volume = 0.3;
+      bgSound.play().catch(() => {});
+    }
+  }, 2500); // intro duration
+});
