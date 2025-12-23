@@ -1,3 +1,13 @@
+document.addEventListener("click", function unlockAudio() {
+  const click = document.getElementById("clickSound");
+  if (click) {
+    click.play().catch(() => {});
+    click.pause();
+    click.currentTime = 0;
+  }
+  document.removeEventListener("click", unlockAudio);
+});
+
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -26,19 +36,38 @@ function onCellClick() {
   const index = this.dataset.index;
   if (!running || paused || board[index] !== "") return;
 
+  // 🔘 Click sound
+  const clickSound = document.getElementById("clickSound");
+  if (clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  }
+
   board[index] = currentPlayer;
   this.textContent = currentPlayer;
 
   if (checkWinner()) {
+
+    // 🏆 Win sound
+    const winSound = document.getElementById("winSound");
+    if (winSound) winSound.play();
+
     statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
     scores[currentPlayer]++;
     updateScore();
     running = false;
+
   } else if (board.every(c => c !== "")) {
+
+    // 🤝 Draw sound
+    const drawSound = document.getElementById("drawSound");
+    if (drawSound) drawSound.play();
+
     statusText.textContent = "😐 It's a draw!";
     scores.D++;
     updateScore();
     running = false;
+
   } else {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusText.textContent = `Player ${currentPlayer}’s turn`;
