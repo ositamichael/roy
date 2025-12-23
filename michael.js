@@ -1,15 +1,5 @@
-// SPLASH SCREEN
-window.addEventListener("load", () => {
-  const splash = document.getElementById("splash");
-  const app = document.querySelector(".wrapper");
 
-  app.style.display = "none";
 
-  setTimeout(() => {
-    splash.style.display = "none";
-    app.style.display = "block";
-  }, 2000);
-});
 
 // UNLOCK AUDIO (required for mobile)
 let audioUnlocked = false;
@@ -122,3 +112,4 @@ function stopBg() {
   bg.pause();
   bg.currentTime = 0;
 }
+
