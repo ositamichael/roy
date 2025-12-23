@@ -1,23 +1,15 @@
+// 🔓 Unlock audio on first user interaction (required for Safari & PWA)
 document.addEventListener("click", function unlockAudio() {
-  const click = document.getElementById("clickSound");
-  if (click) {
-    click.play().catch(() => {});
-    click.pause();
-    click.currentTime = 0;
+  const bg = document.getElementById("bgSound");
+  if (bg) {
+    bg.play().catch(() => {});
+    bg.pause();
+    bg.currentTime = 0;
   }
   document.removeEventListener("click", unlockAudio);
 });
 
-/* 🎵 START BACKGROUND SOUND ON FIRST USER TAP */
-document.addEventListener("click", function startBackground() {
-  const bgSound = document.getElementById("bgSound");
-  if (bgSound && bgSound.paused) {
-    bgSound.volume = 0.25;
-    bgSound.play().catch(() => {});
-  }
-  document.removeEventListener("click", startBackground);
-});
-
+// ================== GAME SETUP ==================
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -42,15 +34,24 @@ cells.forEach(cell => cell.addEventListener("click", onCellClick));
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", togglePause);
 
+// ================== GAME LOGIC ==================
 function onCellClick() {
   const index = this.dataset.index;
   if (!running || paused || board[index] !== "") return;
 
-  // 🔘 Click sound
+  // 🔊 Click sound
   const clickSound = document.getElementById("clickSound");
   if (clickSound) {
     clickSound.currentTime = 0;
-    clickSound.play();
+    clickSound.play().catch(() => {});
+  }
+
+  // 🎵 Start background sound when game is active
+  const bgSound = document.getElementById("bgSound");
+  if (bgSound && bgSound.paused) {
+    bgSound.volume = 0.3;
+    bgSound.loop = true;
+    bgSound.play().catch(() => {});
   }
 
   board[index] = currentPlayer;
@@ -58,12 +59,10 @@ function onCellClick() {
 
   if (checkWinner()) {
 
-    // ⛔ STOP BACKGROUND + 🏆 WIN SOUND
-    const bgSound = document.getElementById("bgSound");
     if (bgSound) bgSound.pause();
 
     const winSound = document.getElementById("winSound");
-    if (winSound) winSound.play();
+    if (winSound) winSound.play().catch(() => {});
 
     statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
     scores[currentPlayer]++;
@@ -72,12 +71,10 @@ function onCellClick() {
 
   } else if (board.every(c => c !== "")) {
 
-    // ⛔ STOP BACKGROUND + 🤝 DRAW SOUND
-    const bgSound = document.getElementById("bgSound");
     if (bgSound) bgSound.pause();
 
     const drawSound = document.getElementById("drawSound");
-    if (drawSound) drawSound.play();
+    if (drawSound) drawSound.play().catch(() => {});
 
     statusText.textContent = "😐 It's a draw!";
     scores.D++;
@@ -109,7 +106,6 @@ function restartGame() {
     cell.classList.remove("winner");
   });
 
-  // 🔄 RESTART BACKGROUND SOUND
   const bgSound = document.getElementById("bgSound");
   if (bgSound) {
     bgSound.currentTime = 0;
@@ -125,10 +121,14 @@ function restartGame() {
 
 function togglePause() {
   paused = !paused;
+  const bgSound = document.getElementById("bgSound");
+
   if (paused) {
+    if (bgSound) bgSound.pause();
     statusText.textContent = "⏸ Game Paused";
     pauseBtn.textContent = "▶ Resume";
   } else {
+    if (bgSound) bgSound.play().catch(() => {});
     statusText.textContent = `Player ${currentPlayer}’s turn`;
     pauseBtn.textContent = "⏸ Pause";
   }
