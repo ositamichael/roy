@@ -1,13 +1,15 @@
+// 🔓 Unlock audio on first user interaction (required for Safari & PWA)
 document.addEventListener("click", function unlockAudio() {
-  const click = document.getElementById("clickSound");
-  if (click) {
-    click.play().catch(() => {});
-    click.pause();
-    click.currentTime = 0;
+  const bg = document.getElementById("bgSound");
+  if (bg) {
+    bg.play().catch(() => {});
+    bg.pause();
+    bg.currentTime = 0;
   }
   document.removeEventListener("click", unlockAudio);
 });
 
+// ================== GAME SETUP ==================
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -32,23 +34,53 @@ cells.forEach(cell => cell.addEventListener("click", onCellClick));
 restartBtn.addEventListener("click", restartGame);
 pauseBtn.addEventListener("click", togglePause);
 
+// ================== GAME LOGIC ==================
 function onCellClick() {
   const index = this.dataset.index;
   if (!running || paused || board[index] !== "") return;
+
+  // 🔊 Click sound
+  const clickSound = document.getElementById("clickSound");
+  if (clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+  }
+
+  // 🎵 Start background sound when game is active
+  const bgSound = document.getElementById("bgSound");
+  if (bgSound && bgSound.paused) {
+    bgSound.volume = 0.3;
+    bgSound.loop = true;
+    bgSound.play().catch(() => {});
+  }
 
   board[index] = currentPlayer;
   this.textContent = currentPlayer;
 
   if (checkWinner()) {
+
+    if (bgSound) bgSound.pause();
+
+    const winSound = document.getElementById("winSound");
+    if (winSound) winSound.play().catch(() => {});
+
     statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
     scores[currentPlayer]++;
     updateScore();
     running = false;
+
   } else if (board.every(c => c !== "")) {
+
+    if (bgSound) bgSound.pause();
+
+    const drawSound = document.getElementById("drawSound");
+    if (drawSound) drawSound.play().catch(() => {});
+
     statusText.textContent = "😐 It's a draw!";
     scores.D++;
     updateScore();
     running = false;
+
   } else {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusText.textContent = `Player ${currentPlayer}’s turn`;
@@ -73,6 +105,13 @@ function restartGame() {
     cell.textContent = "";
     cell.classList.remove("winner");
   });
+
+  const bgSound = document.getElementById("bgSound");
+  if (bgSound) {
+    bgSound.currentTime = 0;
+    bgSound.play().catch(() => {});
+  }
+
   currentPlayer = "X";
   running = true;
   paused = false;
@@ -82,10 +121,14 @@ function restartGame() {
 
 function togglePause() {
   paused = !paused;
+  const bgSound = document.getElementById("bgSound");
+
   if (paused) {
+    if (bgSound) bgSound.pause();
     statusText.textContent = "⏸ Game Paused";
     pauseBtn.textContent = "▶ Resume";
   } else {
+    if (bgSound) bgSound.play().catch(() => {});
     statusText.textContent = `Player ${currentPlayer}’s turn`;
     pauseBtn.textContent = "⏸ Pause";
   }
@@ -96,4 +139,3 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
-
