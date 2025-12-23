@@ -1,3 +1,26 @@
+// 🔓 Unlock audio on first user interaction (REQUIRED for iPhone)
+let audioUnlocked = false;
+
+document.addEventListener("click", () => {
+  if (audioUnlocked) return;
+
+  const bgSound = document.getElementById("bgSound");
+  const clickSound = document.getElementById("clickSound");
+
+  if (bgSound) {
+    bgSound.volume = 0.3;
+    bgSound.play().catch(() => {});
+  }
+
+  if (clickSound) {
+    clickSound.play().catch(() => {});
+    clickSound.pause();
+    clickSound.currentTime = 0;
+  }
+
+  audioUnlocked = true;
+});
+
 /* Splash hide */
 window.addEventListener("load", () => {
   setTimeout(() => {
@@ -43,6 +66,13 @@ pauseBtn.addEventListener("click", togglePause);
 function onCellClick() {
   const index = this.dataset.index;
   if (!running || paused || board[index] !== "") return;
+    // 🔘 Click sound (every move)
+  const clickSound = document.getElementById("clickSound");
+  if (clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+  }
+
 
   const clickSound = document.getElementById("clickSound");
   if (clickSound) {
@@ -53,9 +83,20 @@ function onCellClick() {
   board[index] = currentPlayer;
   this.textContent = currentPlayer;
 
-  if (checkWinner()) {
-    const winSound = document.getElementById("winSound");
-    if (winSound) winSound.play();
+ if (checkWinner()) {
+
+  // 🏆 WIN SOUND (ADD HERE)
+  const winSound = document.getElementById("winSound");
+  if (winSound) {
+    winSound.currentTime = 0;
+    winSound.play().catch(() => {});
+  }
+
+  statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
+  scores[currentPlayer]++;
+  updateScore();
+  running = false;
+
 
     stopBackground();
     statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
@@ -63,9 +104,19 @@ function onCellClick() {
     updateScore();
     running = false;
 
-  } else if (board.every(c => c !== "")) {
-    const drawSound = document.getElementById("drawSound");
-    if (drawSound) drawSound.play();
+} else if (board.every(c => c !== "")) {
+
+  // 🤝 DRAW SOUND (ADD HERE)
+  const drawSound = document.getElementById("drawSound");
+  if (drawSound) {
+    drawSound.currentTime = 0;
+    drawSound.play().catch(() => {});
+  }
+
+  statusText.textContent = "😐 It's a draw!";
+  scores.D++;
+  updateScore();
+  running = false;
 
     stopBackground();
     statusText.textContent = "😐 It's a draw!";
@@ -117,6 +168,14 @@ function restartGame() {
 function togglePause() {
   paused = !paused;
   pauseBtn.textContent = paused ? "▶ Resume" : "⏸ Pause";
+  const bgSound = document.getElementById("bgSound");
+
+if (paused && bgSound) {
+  bgSound.pause();
+} else if (!paused && bgSound) {
+  bgSound.play().catch(() => {});
+}
+
 }
 
 function updateScore() {
@@ -124,3 +183,4 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
+
