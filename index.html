@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
 
   <!-- Mobile / App settings -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#0d6efd">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -23,7 +23,7 @@
 
   <!-- Splash Screen -->
   <div id="splash">
-    <h1>💜 Michael’s Tic Tac Toe</h1>
+    💜 Michael’s Tic Tac Toe
   </div>
 
   <!-- App -->
@@ -56,14 +56,16 @@
     <p class="status" id="status">Player X’s turn</p>
   </div>
 
-  <!-- Sounds -->
-  <audio id="bgSound" src="click.wav" loop></audio>
-  <audio id="clickSound" src="click.wav"></audio>
-  <audio id="winSound" src="win.mp3"></audio>
-  <audio id="drawSound" src="draw.mp3"></audio>
+  <!-- 🔊 Sounds (FILENAMES MATCH YOUR REPO) -->
+  <audio id="bgSound" src="click.mp3.wav" loop></audio>
+  <audio id="clickSound" src="click.mp3.wav"></audio>
+  <audio id="winSound" src="win.mp3.wav"></audio>
+  <audio id="drawSound" src="draw.mp3.wav"></audio>
 
+  <!-- JS -->
   <script src="michael.js"></script>
 
+  <!-- Service Worker -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
