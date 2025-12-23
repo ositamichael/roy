@@ -8,6 +8,21 @@ document.addEventListener("click", function unlockAudio() {
   document.removeEventListener("click", unlockAudio);
 });
 
+/* =========================
+   🔊 SOUND ADDITIONS START
+   ========================= */
+const bgSound = document.getElementById("clickSound");
+const winSound = document.getElementById("winSound");
+const drawSound = document.getElementById("drawSound");
+
+if (bgSound) {
+  bgSound.loop = true;
+  bgSound.volume = 0.3;
+}
+/* =========================
+   🔊 SOUND ADDITIONS END
+   ========================= */
+
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -36,7 +51,12 @@ function onCellClick() {
   const index = this.dataset.index;
   if (!running || paused || board[index] !== "") return;
 
-  // 🔘 Click sound
+  // ▶️ START BACKGROUND SOUND ON FIRST MOVE
+  if (bgSound && bgSound.paused) {
+    bgSound.play();
+  }
+
+  // 🔘 Click sound (per move)
   const clickSound = document.getElementById("clickSound");
   if (clickSound) {
     clickSound.currentTime = 0;
@@ -48,8 +68,11 @@ function onCellClick() {
 
   if (checkWinner()) {
 
-    // 🏆 Win sound
-    const winSound = document.getElementById("winSound");
+    // ⛔ STOP BACKGROUND + 🏆 WIN SOUND
+    if (bgSound) {
+      bgSound.pause();
+      bgSound.currentTime = 0;
+    }
     if (winSound) winSound.play();
 
     statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
@@ -59,8 +82,11 @@ function onCellClick() {
 
   } else if (board.every(c => c !== "")) {
 
-    // 🤝 Draw sound
-    const drawSound = document.getElementById("drawSound");
+    // ⛔ STOP BACKGROUND + 🤝 DRAW SOUND
+    if (bgSound) {
+      bgSound.pause();
+      bgSound.currentTime = 0;
+    }
     if (drawSound) drawSound.play();
 
     statusText.textContent = "😐 It's a draw!";
@@ -92,6 +118,13 @@ function restartGame() {
     cell.textContent = "";
     cell.classList.remove("winner");
   });
+
+  // 🔄 RESET BACKGROUND SOUND
+  if (bgSound) {
+    bgSound.pause();
+    bgSound.currentTime = 0;
+  }
+
   currentPlayer = "X";
   running = true;
   paused = false;
