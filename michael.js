@@ -19,20 +19,11 @@ let running = true;
 let paused = false;
 let scores = { X: 0, O: 0, D: 0 };
 
-// WIN PATTERNS
 const winPatterns = [
-  { combo: [0,1,2], line: { top: "50px", left: "0", width: "100%", rotate: "0deg" } },
-  { combo: [3,4,5], line: { top: "160px", left: "0", width: "100%", rotate: "0deg" } },
-  { combo: [6,7,8], line: { top: "270px", left: "0", width: "100%", rotate: "0deg" } },
-
-  { combo: [0,3,6], line: { top: "0", left: "50px", width: "300px", rotate: "90deg" } },
-  { combo: [1,4,7], line: { top: "0", left: "160px", width: "300px", rotate: "90deg" } },
-  { combo: [2,5,8], line: { top: "0", left: "270px", width: "300px", rotate: "90deg" } },
-
-  { combo: [0,4,8], line: { top: "0", left: "0", width: "420px", rotate: "45deg" } },
-  { combo: [2,4,6], line: { top: "0", left: "300px", width: "420px", rotate: "-45deg" } }
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
 ];
-
 // ================= AUDIO UNLOCK (IMPORTANT) =================
 let audioUnlocked = false;
 document.addEventListener("click", () => {
@@ -90,26 +81,16 @@ function onCellClick() {
 }
 
 function checkWinner() {
-  const winLine = document.getElementById("winLine");
-
-  for (const pattern of winPatterns) {
-    const [a, b, c] = pattern.combo;
-
+  let winnerFound = false;
+  winPatterns.forEach(pattern => {
+    const [a, b, c] = pattern;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      pattern.combo.forEach(i => cells[i].classList.add("winner"));
-
-      winLine.style.display = "block";
-      winLine.style.top = pattern.line.top;
-      winLine.style.left = pattern.line.left;
-      winLine.style.width = pattern.line.width;
-      winLine.style.transform = `rotate(${pattern.line.rotate})`;
-
-      return true;
+      winnerFound = true;
+      pattern.forEach(i => cells[i].classList.add("winner"));
     }
-  }
-  return false;
+  });
+  return winnerFound;
 }
-
 
 // ================= CONTROLS =================
 function restartGame() {
