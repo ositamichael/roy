@@ -1,22 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700&display=swap');
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  height: 100vh;
   background: linear-gradient(135deg, #b39ddb, #ce93d8, #f8bbd0);
   font-family: 'Nunito', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  margin: 0;
 }
 
-
-
-/* App */
 .wrapper {
   background: #fff;
   border-radius: 25px;
@@ -27,60 +20,92 @@ body {
 }
 
 .title {
+  font-size: 2rem;
   color: #6a1b9a;
+  margin-bottom: 15px;
 }
 
 .scoreboard {
   display: flex;
   justify-content: space-around;
-  margin: 15px 0;
-  font-weight: bold;
+  margin-bottom: 20px;
+  font-weight: 700;
   color: #4a148c;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
-  gap: 10px;
+  grid-gap: 10px;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .cell {
   width: 100px;
   height: 100px;
-  background: #ede7f6;
   border-radius: 15px;
-  font-size: 2.5rem;
+  background-color: #ede7f6;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 2.5rem;
+  color: #4a148c;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.25s, background 0.3s;
 }
 
 .cell:hover {
-  background: #ce93d8;
-  transform: scale(1.05);
+  background-color: #ce93d8;
+  transform: scale(1.08);
 }
 
 .winner {
-  background: #a5d6a7 !important;
+  background-color: #a5d6a7 !important;
   color: #1b5e20;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow: 0 0 5px #81c784; }
+  to { box-shadow: 0 0 20px #2e7d32; }
 }
 
 .buttons button {
   background: #7b1fa2;
-  color: white;
+  color: #fff;
   border: none;
   padding: 10px 18px;
   border-radius: 10px;
-  margin: 10px 5px;
+  margin: 5px;
+  font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttons button:hover {
+  background: #9c27b0;
 }
 
 .status {
   margin-top: 10px;
-  font-weight: bold;
+  font-weight: 700;
   color: #6a1b9a;
+  font-size: 1.1rem;
+}
+@media (max-width: 400px) {
+  .wrapper {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 90px);
+  }
+
+  .cell {
+    width: 90px;
+    height: 90px;
+  }
 }
 
