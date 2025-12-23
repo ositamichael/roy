@@ -95,7 +95,7 @@ function checkWinner() {
 // ================= CONTROLS =================
 function restartGame() {
   board.fill("");
-  document.getElementById("winLine").style.display = "none";
+ 
 
   cells.forEach(cell => cell.textContent = "");
 
@@ -127,4 +127,5 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
+
 
