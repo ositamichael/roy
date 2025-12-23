@@ -1,59 +1,31 @@
-// SPLASH SCREEN CONTROL
+// SPLASH SCREEN
 window.addEventListener("load", () => {
   const splash = document.getElementById("splash");
   const app = document.querySelector(".wrapper");
 
-  // hide game first
-  if (app) app.style.display = "none";
+  app.style.display = "none";
 
   setTimeout(() => {
-    if (splash) splash.style.display = "none";
-    if (app) app.style.display = "block";
-  }, 2000); // 2 seconds intro
+    splash.style.display = "none";
+    app.style.display = "block";
+  }, 2000);
 });
 
-
-// 🔓 Unlock audio on first user interaction (REQUIRED for iPhone)
+// UNLOCK AUDIO (required for mobile)
 let audioUnlocked = false;
-
 document.addEventListener("click", () => {
   if (audioUnlocked) return;
 
-  const bgSound = document.getElementById("bgSound");
-  const clickSound = document.getElementById("clickSound");
-
-  if (bgSound) {
-    bgSound.volume = 0.3;
-    bgSound.play().catch(() => {});
-  }
-
-  if (clickSound) {
-    clickSound.play().catch(() => {});
-    clickSound.pause();
-    clickSound.currentTime = 0;
-  }
-
-  audioUnlocked = true;
-});
-
-/* Splash hide */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    const splash = document.getElementById("splash");
-    if (splash) splash.style.display = "none";
-  }, 1200);
-});
-
-/* Unlock audio + start background sound */
-document.addEventListener("click", function unlockAudio() {
   const bg = document.getElementById("bgSound");
   if (bg) {
     bg.volume = 0.2;
     bg.play().catch(() => {});
   }
-  document.removeEventListener("click", unlockAudio);
+
+  audioUnlocked = true;
 });
 
+// GAME LOGIC
 const cells = document.querySelectorAll(".cell");
 const statusText = document.getElementById("status");
 const restartBtn = document.getElementById("restart");
@@ -80,117 +52,63 @@ pauseBtn.addEventListener("click", togglePause);
 
 function onCellClick() {
   const index = this.dataset.index;
-  if (!running || paused || board[index] !== "") return;
-    // 🔘 Click sound (every move)
-  const clickSound = document.getElementById("clickSound");
-  if (clickSound) {
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {});
-  }
+  if (!running || paused || board[index]) return;
 
-
-  const clickSound = document.getElementById("clickSound");
-  if (clickSound) {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  }
+  document.getElementById("clickSound").play().catch(() => {});
 
   board[index] = currentPlayer;
   this.textContent = currentPlayer;
 
- if (checkWinner()) {
-
-  // 🏆 WIN SOUND (ADD HERE)
-  const winSound = document.getElementById("winSound");
-  if (winSound) {
-    winSound.currentTime = 0;
-    winSound.play().catch(() => {});
-  }
-
-  statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
-  scores[currentPlayer]++;
-  updateScore();
-  running = false;
-
-
-    stopBackground();
-    statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
+  if (checkWinner()) {
+    document.getElementById("winSound").play().catch(() => {});
     scores[currentPlayer]++;
     updateScore();
+    statusText.textContent = `🎉 Player ${currentPlayer} wins!`;
     running = false;
-
-} else if (board.every(c => c !== "")) {
-
-  // 🤝 DRAW SOUND (ADD HERE)
-  const drawSound = document.getElementById("drawSound");
-  if (drawSound) {
-    drawSound.currentTime = 0;
-    drawSound.play().catch(() => {});
-  }
-
-  statusText.textContent = "😐 It's a draw!";
-  scores.D++;
-  updateScore();
-  running = false;
-
-    stopBackground();
-    statusText.textContent = "😐 It's a draw!";
+    stopBg();
+  } 
+  else if (board.every(c => c)) {
+    document.getElementById("drawSound").play().catch(() => {});
     scores.D++;
     updateScore();
+    statusText.textContent = "😐 It's a draw!";
     running = false;
-
-  } else {
+    stopBg();
+  } 
+  else {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusText.textContent = `Player ${currentPlayer}’s turn`;
   }
 }
 
-function stopBackground() {
-  const bg = document.getElementById("bgSound");
-  if (bg) {
-    bg.pause();
-    bg.currentTime = 0;
-  }
-}
-
 function checkWinner() {
-  let winnerFound = false;
-  winPatterns.forEach(pattern => {
-    const [a, b, c] = pattern;
+  return winPatterns.some(p => {
+    const [a,b,c] = p;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      winnerFound = true;
-      pattern.forEach(i => cells[i].classList.add("winner"));
+      p.forEach(i => cells[i].classList.add("winner"));
+      return true;
     }
   });
-  return winnerFound;
 }
 
 function restartGame() {
   board.fill("");
-  cells.forEach(cell => {
-    cell.textContent = "";
-    cell.classList.remove("winner");
+  cells.forEach(c => {
+    c.textContent = "";
+    c.classList.remove("winner");
   });
-  currentPlayer = "X";
   running = true;
   paused = false;
+  currentPlayer = "X";
   statusText.textContent = "Player X’s turn";
-
-  const bg = document.getElementById("bgSound");
-  if (bg) bg.play().catch(() => {});
+  document.getElementById("bgSound").play().catch(() => {});
 }
 
 function togglePause() {
   paused = !paused;
   pauseBtn.textContent = paused ? "▶ Resume" : "⏸ Pause";
-  const bgSound = document.getElementById("bgSound");
-
-if (paused && bgSound) {
-  bgSound.pause();
-} else if (!paused && bgSound) {
-  bgSound.play().catch(() => {});
-}
-
+  const bg = document.getElementById("bgSound");
+  paused ? bg.pause() : bg.play().catch(() => {});
 }
 
 function updateScore() {
@@ -199,4 +117,8 @@ function updateScore() {
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
 
-
+function stopBg() {
+  const bg = document.getElementById("bgSound");
+  bg.pause();
+  bg.currentTime = 0;
+}
