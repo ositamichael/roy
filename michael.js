@@ -95,30 +95,32 @@ function checkWinner() {
 // ================= CONTROLS =================
 function restartGame() {
   board.fill("");
- 
-
-  cells.forEach(cell => cell.textContent = "");
-
+  cells.forEach(cell => {
+    cell.textContent = "";
+    cell.classList.remove("winner");
+  });
   currentPlayer = "X";
   running = true;
   paused = false;
-
   statusText.textContent = "Player X’s turn";
   pauseBtn.textContent = "⏸ Pause";
-
-  bgSound.currentTime = 0;
-  bgSound.play().catch(() => {});
 }
 
 function togglePause() {
   paused = !paused;
-  pauseBtn.textContent = paused ? "▶ Resume" : "⏸ Pause";
-
   if (paused) {
-    bgSound.pause();
+    statusText.textContent = "⏸ Game Paused";
+    pauseBtn.textContent = "▶ Resume";
   } else {
-    bgSound.play().catch(() => {});
+    statusText.textContent = `Player ${currentPlayer}’s turn`;
+    pauseBtn.textContent = "⏸ Pause";
   }
+}
+
+function updateScore() {
+  scoreX.textContent = `X Wins: ${scores.X}`;
+  scoreO.textContent = `O Wins: ${scores.O}`;
+  scoreDraw.textContent = `Draws: ${scores.D}`;
 }
 
 // ================= SCORE =================
@@ -127,5 +129,6 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
+
 
 
