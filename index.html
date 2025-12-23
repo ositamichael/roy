@@ -40,11 +40,13 @@
     <p class="status" id="status">Player X’s turn</p>
   </div>
 
-  <!-- 🔊 AUDIO MUST COME FIRST -->
- <audio id="clickSound" src="click.wav" preload="auto"></audio>
-<audio id="winSound" src="win.wav" preload="auto"></audio>
-<audio id="drawSound" src="draw.wav" preload="auto"></audio>
+  <!-- 🔊 SOUND FILES -->
+  <audio id="clickSound" src="click.wav" preload="auto"></audio>
+  <audio id="winSound" src="win.wav" preload="auto"></audio>
+  <audio id="drawSound" src="draw.wav" preload="auto"></audio>
 
+  <!-- 🎵 CONTINUOUS BACKGROUND SOUND -->
+  <audio id="bgSound" src="click.wav" loop preload="auto"></audio>
 
   <!-- 🧠 GAME LOGIC -->
   <script src="michael.js"></script>
@@ -55,7 +57,5 @@
       navigator.serviceWorker.register("service-worker.js");
     }
   </script>
-
 </body>
 </html>
-
