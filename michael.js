@@ -1,3 +1,18 @@
+// SPLASH SCREEN CONTROL
+window.addEventListener("load", () => {
+  const splash = document.getElementById("splash");
+  const app = document.querySelector(".wrapper");
+
+  // hide game first
+  if (app) app.style.display = "none";
+
+  setTimeout(() => {
+    if (splash) splash.style.display = "none";
+    if (app) app.style.display = "block";
+  }, 2000); // 2 seconds intro
+});
+
+
 // 🔓 Unlock audio on first user interaction (REQUIRED for iPhone)
 let audioUnlocked = false;
 
@@ -183,4 +198,5 @@ function updateScore() {
   scoreO.textContent = `O Wins: ${scores.O}`;
   scoreDraw.textContent = `Draws: ${scores.D}`;
 }
+
 
