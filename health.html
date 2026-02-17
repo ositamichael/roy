@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mental Health Journal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      color: #333;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #2b6777;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: none;
+    }
+    .mood-picker {
+      text-align: center;
+      margin: 10px 0;
+    }
+    .mood {
+      font-size: 24px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .mood.selected {
+      border: 2px solid #2b6777;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    button {
+      background: #52ab98;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .entry {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+    .entry-date {
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mental Health Journal</h1>
+
+  <textarea id="journalEntry" placeholder="How are you feeling today? Write your thoughts..."></textarea>
+
+  <div class="mood-picker">
+    <span class="mood" onclick="selectMood(this)">😊</span>
+    <span class="mood" onclick="selectMood(this)">😐</span>
+    <span class="mood" onclick="selectMood(this)">😢</span>
+    <span class="mood" onclick="selectMood(this)">😡</span>
+    <span class="mood" onclick="selectMood(this)">😴</span>
+  </div>
+
+  <button onclick="saveEntry()">Save Entry</button>
+
+  <h2>Your Journal Entries</h2>
+  <div id="entries"></div>
+
+  <script>
+    let selectedMood = "";
+
+    function selectMood(el) {
+      document.querySelectorAll('.mood').forEach(m => m.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedMood = el.textContent;
+    }
+
+    function saveEntry() {
+      const entryText = document.getElementById('journalEntry').value.trim();
+      if (entryText === "" || !selectedMood) {
+        alert("Please write something and select your mood.");
+        return;
+      }
+
+      const today = new Date().toLocaleString();
+      const entry = { date: today, text: entryText, mood: selectedMood };
+
+      let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+      entries.unshift(entry);
+      localStorage.setItem('journalEntries', JSON.stringify(entries));
+
+      document.getElementById('journalEntry').value = "";
+      document.querySelectorAll('.mood').forEach(m => m.classList.remove('selected'));
+      selectedMood = "";
+
+      loadEntries();
+    }
+
+    function loadEntries() {
+      const container = document.getElementById('entries');
+      container.innerHTML = "";
+
+      const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+
+      if (entries.length === 0) {
+        container.innerHTML = "<p>No entries yet. Start writing today!</p>";
+        return;
+      }
+
+      entries.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = 
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = loadEntries;
+  </script>
+
+</body>
+</html>
