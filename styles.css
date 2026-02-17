@@ -1,0 +1,42 @@
+.luxury-streetwear {
+    background-color: #001F3F; /* Dark Navy Blue */
+    color: #FFD700; /* Gold Accents */
+    animation: fadeIn 1s, moveUp 1s;
+}
+
+/* Video Background */
+.video-background {
+    position: relative;
+    overflow: hidden;
+}
+.video-background video {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translate(-50%, -50%);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Premium Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes moveUp {
+    from { transform: translateY(20px); }
+    to { transform: translateY(0); }
+}
