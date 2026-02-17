@@ -3,45 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>AXIRE - Luxury Streetwear</title>
+    <title>Axire Luxury Streetwear</title>
+    <style>
+        body {
+            background-color: #001F3F; /* Dark navy blue */
+            color: gold;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .product-category {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .video {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <h1>AXIRE</h1>
-        <ul>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#cart">Cart</a></li>
-        </ul>
-    </nav>
     <header>
-        <h2>Welcome to AXIRE</h2>
-        <p>Luxury Streetwear Collection</p>
+        <h1>Axire Luxury Streetwear</h1>
+        <p>Elevate your style with premium fashion pieces</p>
     </header>
-    <section id="products">
-        <h2>Our Collection</h2>
-        <div class="product-grid">
-            <div class="product-item">
-                <video src="https://www.pexels.com/video/some-video" controls></video>
-                <h3>Baggy Jeans</h3>
-            </div>
-            <div class="product-item">
-                <video src="https://www.unsplash.com/video/some-video" controls></video>
-                <h3>Zip Hoodie</h3>
-            </div>
-            <!-- More products -->
-        </div>
+
+    <section class="product-category">
+        <h2>Men's Collection</h2>
+        <h3>Trackpants</h3>
+        <video class="video" controls>
+            <source src="https://www.pexels.com/video/trackpants-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3>Tracksuits</h3>
+        <video class="video" controls>
+            <source src="https://www.pexels.com/video/tracksuits-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3>Baggy Jeans</h3>
+        <video class="video" controls>
+            <source src="https://www.unsplash.com/video/baggy-jeans-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </section>
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message"></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+
+    <section class="product-category">
+        <h2>Women's Collection</h2>
+        <h3>Crop Tops</h3>
+        <video class="video" controls>
+            <source src="https://www.unsplash.com/video/crop-tops-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3>Zip Hoodies</h3>
+        <video class="video" controls>
+            <source src="https://www.pexels.com/video/zip-hoodies-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </section>
-    <script src="script.js"></script>
+
+    <footer>
+        <p>&copy; 2026 Axire. All rights reserved.</p>
+    </footer>
 </body>
 </html>
