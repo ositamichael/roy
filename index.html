@@ -3,81 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axire Luxury Streetwear</title>
-    <style>
-        body {
-            background-color: #001f3f; /* Dark Navy Blue */
-            color: #FFD700; /* Gold Accents */
-            font-family: Arial, sans-serif;
-        }
-        h1, h2, h3 {
-            text-align: center;
-        }
-        .product {
-            margin: 20px;
-            padding: 10px;
-            border: 1px solid #FFD700;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-        .video-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .shop-button {
-            background-color: #FFD700;
-            color: #001f3f;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <title>AXIRE - Luxury Streetwear</title>
 </head>
 <body>
-    <h1>Welcome to Axire Luxury Streetwear</h1>
-    <h2>Your Destination for Fashion and Comfort</h2>
-
-    <section>
-        <h3>Featured Products</h3>
-        <div class="product">
-            <h4>Trackpants</h4>
-            <img src="path_to_trackpants_image.jpg" alt="Trackpants" style="width:100%;">
-            <p>Description of stylish trackpants.</p>
-            <a href="#" class="shop-button">Shop Now</a>
-        </div>
-        <div class="product">
-            <h4>Tracksuits</h4>
-            <img src="path_to_tracksuits_image.jpg" alt="Tracksuits" style="width:100%;">
-            <p>Description of comfortable tracksuits.</p>
-            <a href="#" class="shop-button">Shop Now</a>
-        </div>
-        <div class="product">
-            <h4>Baggy Jeans</h4>
-            <img src="path_to_baggyjeans_image.jpg" alt="Baggy Jeans" style="width:100%;">
-            <p>Description of trendy baggy jeans.</p>
-            <a href="#" class="shop-button">Shop Now</a>
-        </div>
-        <div class="product">
-            <h4>Crop Tops</h4>
-            <img src="path_to_croptops_image.jpg" alt="Crop Tops" style="width:100%;">
-            <p>Description of chic crop tops.</p>
-            <a href="#" class="shop-button">Shop Now</a>
-        </div>
-        <div class="product">
-            <h4>Zip Hoodies</h4>
-            <img src="path_to_ziphoodies_image.jpg" alt="Zip Hoodies" style="width:100%;">
-            <p>Description of cozy zip hoodies.</p>
-            <a href="#" class="shop-button">Shop Now</a>
+    <nav>
+        <h1>AXIRE</h1>
+        <ul>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#cart">Cart</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h2>Welcome to AXIRE</h2>
+        <p>Luxury Streetwear Collection</p>
+    </header>
+    <section id="products">
+        <h2>Our Collection</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <video src="https://www.pexels.com/video/some-video" controls></video>
+                <h3>Baggy Jeans</h3>
+            </div>
+            <div class="product-item">
+                <video src="https://www.unsplash.com/video/some-video" controls></video>
+                <h3>Zip Hoodie</h3>
+            </div>
+            <!-- More products -->
         </div>
     </section>
-
-    <section class="video-container">
-        <h3>Watch Our Video Demos</h3>
-        <video width="320" height="240" controls>
-            <source src="path_to_your_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <p>Check out our latest collection in action!</p>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
     </section>
+    <script src="script.js"></script>
 </body>
 </html>
