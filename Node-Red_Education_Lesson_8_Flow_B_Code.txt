@@ -1,0 +1,209 @@
+[
+    {
+        "id": "ef71064d595e39a1",
+        "type": "function",
+        "z": "0af65cac5abf68ba",
+        "name": "Set INSERT SQL for Cust. Order Address",
+        "func": "// Bring in the payload and place into variables for this process\n\nlet order  =  msg.payload.FODORNO\nlet cuname =  msg.payload.FODCUNM\nlet addr1 = msg.payload.FODCUA1\nlet addr2 = msg.payload.FODCUA2\nlet addr3 = msg.payload.FODCUA3\nlet addr4 = msg.payload.FODCUA4\nlet pono = msg.payload.FODPONO\nlet phone = msg.payload.FODPHNO\n\nconsole.log(\"order\", order)\nconsole.log(\"CUST\", cuname)\n\n// Build the SQL statement, only SET the column if the value from the Forms Node is NOT null/blank\n\nlet payloadout = `insert into iugred.cusordadd (ODORNO, ODCUNM, ODCUA1, ODCUA2,  ODCUA3, ODCUA4, ODPONO, ODPHNO) \nVALUES ('${order}', '${cuname}', '${addr1}', '${addr2}', '${addr3}', '${addr4}', '${pono}', '${phone}' )`\n\n//  Store the SQL statement in the msg.payload   , when '${addr1}' > ' ' then set ODADR1 = '${addr1}';\n\nmsg.payload = payloadout\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 540,
+        "wires": [
+            [
+                "f1cd5cab5f49bb56",
+                "461860ff8b829620"
+            ]
+        ]
+    },
+    {
+        "id": "461860ff8b829620",
+        "type": "debug",
+        "z": "0af65cac5abf68ba",
+        "name": "debug 209",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e1f112d9f4109a13",
+        "type": "catch",
+        "z": "0af65cac5abf68ba",
+        "name": "Catch Duplicates",
+        "scope": [
+            "f1cd5cab5f49bb56"
+        ],
+        "uncaught": false,
+        "x": 520,
+        "y": 640,
+        "wires": [
+            [
+                "1167ed2319c2013c"
+            ]
+        ]
+    },
+    {
+        "id": "769fe85715fa8b3a",
+        "type": "ui_form",
+        "z": "0af65cac5abf68ba",
+        "name": "",
+        "label": "",
+        "group": "20b37f0ec7979bd4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Sales Order Number",
+                "value": "FODORNO",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": " Customer Name",
+                "value": "FODCUNM",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA1",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA2",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA3",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Country",
+                "value": "FODCUA4",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Post Code",
+                "value": "FODPONO",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Phone ",
+                "value": "FODPHNO",
+                "type": "number",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "FODORNO": "",
+            "FODCUNM": "",
+            "FODCUA1": "",
+            "FODCUA2": "",
+            "FODCUA3": "",
+            "FODCUA4": "",
+            "FODPONO": "",
+            "FODPHNO": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 190,
+        "y": 540,
+        "wires": [
+            [
+                "ef71064d595e39a1"
+            ]
+        ]
+    },
+    {
+        "id": "1167ed2319c2013c",
+        "type": "ui_toast",
+        "z": "0af65cac5abf68ba",
+        "position": "dialog",
+        "displayTime": "20",
+        "highlight": "RED",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Advise if Duplicates",
+        "x": 810,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1cd5cab5f49bb56",
+        "type": "DB2 for i",
+        "z": "0af65cac5abf68ba",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 900,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20b37f0ec7979bd4",
+        "type": "ui_group",
+        "name": "Orders",
+        "tab": "d9f6bdd78416d845",
+        "order": 2,
+        "disp": true,
+        "width": 13,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c783136d02b66193",
+        "type": "DB2 for i Config",
+        "cnnname": "MikeR",
+        "db": "*LOCAL",
+        "keepalive": true
+    },
+    {
+        "id": "d9f6bdd78416d845",
+        "type": "ui_tab",
+        "name": "Table Output",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

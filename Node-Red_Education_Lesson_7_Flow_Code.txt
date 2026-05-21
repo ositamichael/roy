@@ -1,0 +1,360 @@
+[
+    {
+        "id": "7b1447afe5f9f5c2",
+        "type": "csv",
+        "z": "d1ce7af429827e4d",
+        "name": "Maintain .csv table",
+        "sep": ":",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 1210,
+        "y": 520,
+        "wires": [
+            [
+                "c7b818640530f27d"
+            ]
+        ]
+    },
+    {
+        "id": "bb9cc0c3868d93c7",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Populate UI Table with Order Details (Loop)",
+        "func": "\n//\nlet inrow = msg.payload\nlet count = 0\nlet loop = inrow.events\n\n//for (let event in loop) {\n  // \n    //    count += 1\n//\n  //      console.log('Record', inrow.OBWHLO)\n//\n  //  }\n//\nlet thefile = \"/home/mike/orderlinesfile\"\nmsg.file = thefile\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 360,
+        "wires": [
+            [
+                "cea980043cf7a30b",
+                "be5f3371064eaf3e",
+                "7b1447afe5f9f5c2"
+            ]
+        ]
+    },
+    {
+        "id": "c7b818640530f27d",
+        "type": "file",
+        "z": "d1ce7af429827e4d",
+        "name": "Populate CSV Table",
+        "filename": "file",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1400,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be5f3371064eaf3e",
+        "type": "debug",
+        "z": "d1ce7af429827e4d",
+        "name": "debug 198",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ab4baae5e6bf37b8",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Set SQL for Order Detail",
+        "func": "let order = msg.payload.order\n\nlet payloadout = `(Select OBORNO, OBFACI, OBWHLO, OBITNO, OBITDS, OBTEDS, OBSAPR from IUGRED.orderlinex where OBORNO = '${order}')`\n\nmsg.payload = payloadout\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "3aa952a8c3364e95"
+            ]
+        ]
+    },
+    {
+        "id": "cfea0b3689693e90",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Set SQL for Order Header",
+        "func": "let order = msg.payload.order\n\nlet payloadout = `(select OAORNO, OAORDT, OAOREF, OAYREF from IUGRED.orderheadx where OAORNO = '${order}')`\n\nmsg.payload = payloadout\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "7ebdcda43b38f5a6"
+            ]
+        ]
+    },
+    {
+        "id": "abf6b6617d624a88",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Set SQL for Cust. Order Address",
+        "func": "let order = msg.payload.order\n\nlet payloadout = `(select ODCUNM, ODCUA1, ODCUA2, ODCUA3, ODCUA4, ODPONO FROM IUGRED.cusordadd where ODORNO = '${order}')`\n\nmsg.payload = payloadout\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "6aee7fa8e35686ee"
+            ]
+        ]
+    },
+    {
+        "id": "c2d4b8cbab74ea57",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Populate UI Table with Header Info.",
+        "func": "// Populate Table with Header Info.\n\nlet inrow = msg.payload\n\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 240,
+        "wires": [
+            [
+                "1ba18eba20b14630",
+                "e1517a3de5eb6b39"
+            ]
+        ]
+    },
+    {
+        "id": "126f555b51cd7aaa",
+        "type": "function",
+        "z": "d1ce7af429827e4d",
+        "name": "Populate UI Table with Header Info.",
+        "func": "// Populate Table with Header Info.\n\nlet inrow = msg.payload\n\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 120,
+        "wires": [
+            [
+                "030ce58980a4fccb",
+                "5d3154b501d89988"
+            ]
+        ]
+    },
+    {
+        "id": "e1517a3de5eb6b39",
+        "type": "debug",
+        "z": "d1ce7af429827e4d",
+        "name": "debug 197",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5d3154b501d89988",
+        "type": "debug",
+        "z": "d1ce7af429827e4d",
+        "name": "debug 196",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3aa952a8c3364e95",
+        "type": "DB2 for i",
+        "z": "d1ce7af429827e4d",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 660,
+        "y": 360,
+        "wires": [
+            [
+                "bb9cc0c3868d93c7"
+            ]
+        ]
+    },
+    {
+        "id": "7ebdcda43b38f5a6",
+        "type": "DB2 for i",
+        "z": "d1ce7af429827e4d",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "c2d4b8cbab74ea57"
+            ]
+        ]
+    },
+    {
+        "id": "6aee7fa8e35686ee",
+        "type": "DB2 for i",
+        "z": "d1ce7af429827e4d",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 660,
+        "y": 120,
+        "wires": [
+            [
+                "126f555b51cd7aaa"
+            ]
+        ]
+    },
+    {
+        "id": "cea980043cf7a30b",
+        "type": "ui_table",
+        "z": "d1ce7af429827e4d",
+        "group": "27cf7a9acd22bd83",
+        "name": "DB OOLINE",
+        "order": 2,
+        "width": 18,
+        "height": 16,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1270,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1ba18eba20b14630",
+        "type": "ui_table",
+        "z": "d1ce7af429827e4d",
+        "group": "27cf7a9acd22bd83",
+        "name": "DB OOHEAD",
+        "order": 1,
+        "width": 18,
+        "height": 2,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1280,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "030ce58980a4fccb",
+        "type": "ui_table",
+        "z": "d1ce7af429827e4d",
+        "group": "27cf7a9acd22bd83",
+        "name": "DB CUSTOMER",
+        "order": 1,
+        "width": 15,
+        "height": 2,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1280,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f6150297d2bded79",
+        "type": "inject",
+        "z": "d1ce7af429827e4d",
+        "name": "Order Number for test (3)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"order\" : 'S105184'}",
+        "payloadType": "jsonata",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "cfea0b3689693e90",
+                "abf6b6617d624a88",
+                "ab4baae5e6bf37b8"
+            ]
+        ]
+    },
+    {
+        "id": "c783136d02b66193",
+        "type": "DB2 for i Config",
+        "cnnname": "MikeR",
+        "db": "*LOCAL",
+        "keepalive": true
+    },
+    {
+        "id": "27cf7a9acd22bd83",
+        "type": "ui_group",
+        "name": "Order Head",
+        "tab": "5c7aeacf71dde897",
+        "order": 3,
+        "disp": true,
+        "width": "18",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5c7aeacf71dde897",
+        "type": "ui_tab",
+        "name": "Databasex",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

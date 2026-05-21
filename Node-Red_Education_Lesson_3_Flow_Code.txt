@@ -1,0 +1,505 @@
+[
+    {
+        "id": "15211a0e79c27786",
+        "type": "inject",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "e4760c967c292128"
+            ]
+        ]
+    },
+    {
+        "id": "7af6c4751f95de5d",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "red",
+        "func": "msg.payload = { \"on\": true, \"bri\": 100, \"hue\": 0 }\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 160,
+        "wires": [
+            [
+                "fb41f66536d61567"
+            ]
+        ]
+    },
+    {
+        "id": "f3fa32cba54c1f7a",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "yellow",
+        "func": "msg.payload = { \"on\": true, \"bri\": 100, \"hue\": 50 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 200,
+        "wires": [
+            [
+                "016037ac200aa421"
+            ]
+        ]
+    },
+    {
+        "id": "2e90b7d435abc9cd",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "green",
+        "func": "msg.payload = { \"on\": true, \"bri\": 100, \"hue\": 100 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 240,
+        "wires": [
+            [
+                "e9cecf65a68a03a7"
+            ]
+        ]
+    },
+    {
+        "id": "4988c48af292c90f",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "Open red gate",
+        "func": "let payload = msg.payload;\nlet field = \"\"\nif ((payload > 300 && payload < 359)) {\n    field = (\"open\")\n}\n\nelse {\n    field = (\"close\") \n}\nmsg.payload = field\nmsg.topic = \"control\"\n//msg.field = field\nreturn msg;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "96bd386329c00330"
+            ]
+        ]
+    },
+    {
+        "id": "7798a09b0634d60e",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "Open yellow gate",
+        "func": "let payload = msg.payload;\nlet field = \"\"\nif ((payload >200 && payload < 299)) {\n    field = (\"open\")\n}\n\nelse {\n    field = (\"close\") \n}\nmsg.payload = field\nmsg.topic = \"control\"\n//msg.field = field\nreturn msg;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 380,
+        "wires": [
+            [
+                "ef320ea51cdf31b4"
+            ]
+        ]
+    },
+    {
+        "id": "9a8c287614adef3d",
+        "type": "function",
+        "z": "3575a0fb3984d503",
+        "name": "Open green gate",
+        "func": "let payload = msg.payload;\nlet field = \"\"\nif (payload >0 && payload < 199) {\n    field = (\"open\")\n}\n\nelse {\n    field = (\"close\") \n}\nmsg.payload = field\nmsg.topic = \"control\"\n//msg.field = field\nreturn msg;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 420,
+        "wires": [
+            [
+                "8c70e9255dbaaa14"
+            ]
+        ]
+    },
+    {
+        "id": "4a995ec425b27456",
+        "type": "debug",
+        "z": "3575a0fb3984d503",
+        "name": "debug 139",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 720,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "fb41f66536d61567",
+        "type": "delay",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 160,
+        "wires": [
+            [
+                "96bd386329c00330"
+            ]
+        ]
+    },
+    {
+        "id": "016037ac200aa421",
+        "type": "delay",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 200,
+        "wires": [
+            [
+                "ef320ea51cdf31b4"
+            ]
+        ]
+    },
+    {
+        "id": "e9cecf65a68a03a7",
+        "type": "delay",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "8c70e9255dbaaa14"
+            ]
+        ]
+    },
+    {
+        "id": "5220f09e9c590ef2",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "Colour selections",
+        "info": "",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "13ce81d5bb7721fe",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "3 way gate",
+        "info": "",
+        "x": 1030,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ea8b1f40564b06d9",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "Random number into groups",
+        "info": "",
+        "x": 770,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d48c25ab8e43ab26",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "Insert point of data here",
+        "info": "",
+        "x": 480,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1383e5ff786249a2",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "Delay ensures signal arrives after gate selection",
+        "info": "",
+        "x": 850,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "e62fcb48755af95e",
+        "type": "inject",
+        "z": "3575a0fb3984d503",
+        "name": "Toggle the Gate",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "e4760c967c292128"
+            ]
+        ]
+    },
+    {
+        "id": "b00e4cf09b3d397f",
+        "type": "comment",
+        "z": "3575a0fb3984d503",
+        "name": "To the Hue Lightstrip",
+        "info": "",
+        "x": 1340,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b0e2653bf86b69b9",
+        "type": "link out",
+        "z": "3575a0fb3984d503",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [],
+        "x": 1255,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "3f777147126c757c",
+        "type": "random",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "low": 1,
+        "high": "359",
+        "inte": "true",
+        "property": "payload",
+        "x": 480,
+        "y": 460,
+        "wires": [
+            [
+                "7798a09b0634d60e",
+                "4a995ec425b27456",
+                "9a8c287614adef3d",
+                "4988c48af292c90f"
+            ]
+        ]
+    },
+    {
+        "id": "96bd386329c00330",
+        "type": "gate",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1020,
+        "y": 220,
+        "wires": [
+            [
+                "b0e2653bf86b69b9",
+                "219b111ea0ecd2b6"
+            ]
+        ]
+    },
+    {
+        "id": "ef320ea51cdf31b4",
+        "type": "gate",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "b0e2653bf86b69b9",
+                "219b111ea0ecd2b6"
+            ]
+        ]
+    },
+    {
+        "id": "8c70e9255dbaaa14",
+        "type": "gate",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1020,
+        "y": 340,
+        "wires": [
+            [
+                "b0e2653bf86b69b9",
+                "219b111ea0ecd2b6"
+            ]
+        ]
+    },
+    {
+        "id": "e4760c967c292128",
+        "type": "gate",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "3f777147126c757c",
+                "2e90b7d435abc9cd",
+                "f3fa32cba54c1f7a",
+                "7af6c4751f95de5d"
+            ]
+        ]
+    },
+    {
+        "id": "219b111ea0ecd2b6",
+        "type": "mqtt out",
+        "z": "3575a0fb3984d503",
+        "name": "",
+        "topic": "lightsensor_01",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "de887429d516dace",
+        "x": 1320,
+        "y": 220,
+        "wires": [],
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "de887429d516dace",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

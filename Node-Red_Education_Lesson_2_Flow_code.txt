@@ -1,0 +1,182 @@
+[
+    {
+        "id": "ed8f051813362a3c",
+        "type": "inject",
+        "z": "8472e326e74d64f2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "c39c970bb4fe4479"
+            ]
+        ]
+    },
+    {
+        "id": "586076939306eb65",
+        "type": "function",
+        "z": "8472e326e74d64f2",
+        "name": "Create JSON",
+        "func": "let value = msg.payload\n\nmsg.payload = { \"on\": true, \"bri\": 100, \"hue\": (value) }\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 120,
+        "wires": [
+            [
+                "2885d2590dff4ad2"
+            ]
+        ]
+    },
+    {
+        "id": "d0b59dc31f15703f",
+        "type": "debug",
+        "z": "8472e326e74d64f2",
+        "name": "debug 199",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ef7b0eb926b9380e",
+        "type": "inject",
+        "z": "8472e326e74d64f2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "c39c970bb4fe4479"
+            ]
+        ]
+    },
+    {
+        "id": "2885d2590dff4ad2",
+        "type": "mqtt out",
+        "z": "8472e326e74d64f2",
+        "name": "",
+        "topic": "lightsensor_01",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "de887429d516dace",
+        "x": 1040,
+        "y": 120,
+        "wires": [],
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "9972094e135bb094",
+        "type": "random",
+        "z": "8472e326e74d64f2",
+        "name": "",
+        "low": 1,
+        "high": "359",
+        "inte": "true",
+        "property": "payload",
+        "x": 560,
+        "y": 120,
+        "wires": [
+            [
+                "586076939306eb65",
+                "d0b59dc31f15703f"
+            ]
+        ]
+    },
+    {
+        "id": "c39c970bb4fe4479",
+        "type": "gate",
+        "z": "8472e326e74d64f2",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "9972094e135bb094"
+            ]
+        ]
+    },
+    {
+        "id": "de887429d516dace",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

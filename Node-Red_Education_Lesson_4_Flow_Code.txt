@@ -1,0 +1,188 @@
+[
+    {
+        "id": "86cf929daf5cf734",
+        "type": "inject",
+        "z": "58d46b689e728ecd",
+        "name": "True Boolean (ON)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "6c53585209bdde9f",
+                "f224e04046e617e0"
+            ]
+        ]
+    },
+    {
+        "id": "ab950b7d20827408",
+        "type": "inject",
+        "z": "58d46b689e728ecd",
+        "name": "False Boolean (OFF)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 240,
+        "y": 280,
+        "wires": [
+            [
+                "6c53585209bdde9f",
+                "f224e04046e617e0"
+            ]
+        ]
+    },
+    {
+        "id": "3eae210d9006959d",
+        "type": "comment",
+        "z": "58d46b689e728ecd",
+        "name": "General Light Strip on/off Boolean",
+        "info": "",
+        "x": 260,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6c53585209bdde9f",
+        "type": "debug",
+        "z": "58d46b689e728ecd",
+        "name": "debug 82",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "f224e04046e617e0",
+        "type": "mqtt out",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "topic": "lightsensor",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "362b264118b762de",
+        "x": 770,
+        "y": 220,
+        "wires": [],
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "b04cd9854909f5c2",
+        "type": "ui_switch",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": true,
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": false,
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "f224e04046e617e0",
+                "6c53585209bdde9f"
+            ]
+        ]
+    },
+    {
+        "id": "d52476e7dc68c913",
+        "type": "ui_slider",
+        "z": "58d46b689e728ecd",
+        "name": "",
+        "label": "slider",
+        "tooltip": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "6c53585209bdde9f",
+                "f224e04046e617e0"
+            ]
+        ]
+    },
+    {
+        "id": "362b264118b762de",
+        "type": "mqtt-broker",
+        "name": " xCYFgVEx-8wfhFXfn",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

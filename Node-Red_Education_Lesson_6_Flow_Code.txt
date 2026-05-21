@@ -1,0 +1,161 @@
+[
+    {
+        "id": "ae790dc06d94efb6",
+        "type": "comment",
+        "z": "e57470abce6361c1",
+        "name": "Connecting tothe world - e-mail",
+        "info": "",
+        "x": 270,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "6164c683826ac568",
+        "type": "ui_form",
+        "z": "e57470abce6361c1",
+        "name": "",
+        "label": "",
+        "group": "25a1df44e33ab0fa",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Temperature",
+                "value": "temp",
+                "type": "number",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Recipient",
+                "value": "email",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "temp": "",
+            "email": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "c1e0949fe49cf38d"
+            ]
+        ]
+    },
+    {
+        "id": "7f2fe2adb939eb8f",
+        "type": "ui_gauge",
+        "z": "e57470abce6361c1",
+        "name": "Temp Gauge",
+        "group": "25a1df44e33ab0fa",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "25",
+        "seg2": "29",
+        "className": "",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c1e0949fe49cf38d",
+        "type": "function",
+        "z": "e57470abce6361c1",
+        "name": "function 66",
+        "func": "\nlet temperature = msg.payload.temp\nlet email1 = msg.payload.email\n\nif (email1 != \"\")\n\n\n{\n    email1 = msg.payload.email\n    console.log('emailyes', email1)\n}\nelse\n{\n    email1 = \"mryan@eoguk.com\"\n    console.log('emailno', email1)\n}\n\nmsg.payload = temperature\nmsg.topic = email1\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [
+                "42f763a80bd4717f",
+                "7f2fe2adb939eb8f"
+            ]
+        ]
+    },
+    {
+        "id": "42f763a80bd4717f",
+        "type": "function",
+        "z": "e57470abce6361c1",
+        "name": "function 67",
+        "func": "// Get the email address and the threshold temperature from \n// the previous node and hold these in new Flow variables \n\nlet person = msg.topic \nlet temp = msg.payload\n\n// populate the emil variables for the email out node\n//on output, msg.topic needs to be the Subject line of \n//the email.\n\nmsg.topic = \"i-Brew Brewery Status\"; // subject\n\n//msg.payload will have the body of the message.  Note the \n// html coding to make the email look better.\n// We will send a different message based on the temperature\n\nif (temp < 29)\n{\nmsg.payload = ` <head> <h1> Temperature Now Safe Levels. \n</h1> </head > \n<body> <h2> Basically, you got away with it. </h2>  \n<p> P.S. Local fire services have been stood down! \n</p> </body>`;\n}\nelse\n{\nmsg.payload = ` <head> <h1> Temperature Exceding Safe Levels. \n</h1> </head > \n<body> <h2> Basically the server is on fire. </h2>  \n<p> P.S. Local fire services should probably be notified! \n</p> </body>`;\n}\n// message to\nmsg.to = person ;  // to\n\n//from\nmsg.from = \"MQTT Monitoring Services\";  // from\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "0643341fad8f24a1"
+            ]
+        ]
+    },
+    {
+        "id": "0643341fad8f24a1",
+        "type": "e-mail",
+        "z": "e57470abce6361c1",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1190,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "25a1df44e33ab0fa",
+        "type": "ui_group",
+        "name": "Temp Alert",
+        "tab": "31b9ed3d81eb3ee7",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "31b9ed3d81eb3ee7",
+        "type": "ui_tab",
+        "name": "Mailing",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

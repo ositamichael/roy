@@ -1,0 +1,224 @@
+[
+    {
+        "id": "cb4753c57abc3c6c",
+        "type": "ui_form",
+        "z": "692b673989faf67c",
+        "name": "URL for CSV",
+        "label": "",
+        "group": "9d287efb8374deaf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Label",
+                "value": "file",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "file": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "payload",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 190,
+        "y": 1240,
+        "wires": [
+            [
+                "6cc53bbde93ea848",
+                "e654a44ce7e97519"
+            ]
+        ]
+    },
+    {
+        "id": "22aa049a73d5ba87",
+        "type": "ui_table",
+        "z": "692b673989faf67c",
+        "group": "20b37f0ec7979bd4",
+        "name": "SOME-ORDER-LIST",
+        "order": 1,
+        "width": 13,
+        "height": 18,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1300,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "e654a44ce7e97519",
+        "type": "file in",
+        "z": "692b673989faf67c",
+        "name": "SOMEORDERS",
+        "filename": "payload.file",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 460,
+        "y": 1340,
+        "wires": [
+            [
+                "55b415259f60def1",
+                "94ad6d03dd1335f7"
+            ]
+        ]
+    },
+    {
+        "id": "c5b222d38031b744",
+        "type": "inject",
+        "z": "692b673989faf67c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.file",
+                "v": "/home/COMMON/ordertest",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 1340,
+        "wires": [
+            [
+                "e654a44ce7e97519",
+                "c3828f1a76eef750"
+            ]
+        ]
+    },
+    {
+        "id": "55b415259f60def1",
+        "type": "csv",
+        "z": "692b673989faf67c",
+        "name": "Filein",
+        "sep": ":",
+        "hdrin": false,
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "ORDER, QTY, DIVISION, OURPART, CUSTPART, DESC",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 870,
+        "y": 1340,
+        "wires": [
+            [
+                "391111d6be584a65",
+                "22aa049a73d5ba87"
+            ]
+        ]
+    },
+    {
+        "id": "391111d6be584a65",
+        "type": "debug",
+        "z": "692b673989faf67c",
+        "name": "debug 191",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "94ad6d03dd1335f7",
+        "type": "debug",
+        "z": "692b673989faf67c",
+        "name": "debug 192",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "6cc53bbde93ea848",
+        "type": "debug",
+        "z": "692b673989faf67c",
+        "name": "debug 194",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "c3828f1a76eef750",
+        "type": "debug",
+        "z": "692b673989faf67c",
+        "name": "debug 195",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "9d287efb8374deaf",
+        "type": "ui_group",
+        "name": "Input",
+        "tab": "d9f6bdd78416d845",
+        "order": 1,
+        "disp": true,
+        "width": 11,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "20b37f0ec7979bd4",
+        "type": "ui_group",
+        "name": "Orders",
+        "tab": "d9f6bdd78416d845",
+        "order": 2,
+        "disp": true,
+        "width": 13,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d9f6bdd78416d845",
+        "type": "ui_tab",
+        "name": "Table Output",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

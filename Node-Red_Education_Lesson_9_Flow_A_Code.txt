@@ -1,0 +1,324 @@
+[
+    {
+        "id": "75bcba6ad114a696",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Extract Payload T",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.temperature_c;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 360,
+        "wires": [
+            [
+                "0b14ad6fbf5be106",
+                "7a6f5181bfd0df10"
+            ]
+        ]
+    },
+    {
+        "id": "778d3114a6116fd0",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Extract Payload H",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.humidity;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 300,
+        "wires": [
+            [
+                "6faff4c967231788"
+            ]
+        ]
+    },
+    {
+        "id": "6faff4c967231788",
+        "type": "ui_gauge",
+        "z": "6ffdd1695a5059d0",
+        "name": "",
+        "group": "cb2867459c8e3cc6",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "RH",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1160,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e5beac57aa6a94e7",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Send Warning",
+        "func": "//var person = global.get('email') || 0;\n\n//var person ='mryan@eoguk.com'\n//var person = 'email'\n\nvar person = flow.get('email') \n//var person = 'josh.ryan@eoguk.com'\n\n// populate email variables \n\n// subject\n\nmsg.topic = \"i-Brew Delivery Advice\"; // subject\n\n//message\n\nmsg.payload = ` <head> <h1> Temperature Exceding Safe Levels. </h1> </head > \n<body> <h2> Basically the server is on fire. </h2>  \n<p> P.S. Local fire services should probably be notified! </p> </body>`; // message to\n\nmsg.to = person ;  // to\n\n//from\n\nmsg.from = \"MQTT Monitoring Services\";  // from\n\n// msg.cc = \"mryan@eoguk.com\";  // cc\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1320,
+        "y": 420,
+        "wires": [
+            [
+                "b73d14f5e53f6766"
+            ]
+        ]
+    },
+    {
+        "id": "b73d14f5e53f6766",
+        "type": "e-mail",
+        "z": "6ffdd1695a5059d0",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1610,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0b14ad6fbf5be106",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Gate protocol",
+        "func": "let threshold = flow.get('threshold') \nlet told = flow.get('told') || 0;\nlet nowok = flow.get('nowok') || 0;\n\nconsole.log('tempupin', threshold, told, nowok)\n\nlet payload = msg.payload;\n\nif (payload > threshold) {\n    \n    if (told === 0)   {\n    console.log('tested Zero',told)\n           flow.set('told', 1)\n        told = 1\n        flow.set('nowok', 0)\n        nowok = 0\n        msg.payload = 'toggle'\n        return [msg, null, null];\n    }\n\n    console.log('temp high', told)\n    \n\n    }\n\nif (payload <= threshold) {\n\n    if (nowok === 0) {\n\n        flow.set('told', 0)\n        told = 0\n        flow.set('nowok', 1)\n        nowok = 1\n        msg.payload = '0' \n        return [null, msg, null];\n    }\n\n    console.log('temp cool', told)\n\n    \n}\nconsole.log('Drop-out...')\nreturn [null, null, msg]",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 480,
+        "wires": [
+            [
+                "e5beac57aa6a94e7"
+            ],
+            [
+                "f2753796603c9534"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f2753796603c9534",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Rescind Warning",
+        "func": "//var person = global.get('cmail') || 0;\nvar person ='mryan@eoguk.com'\n\n// populate email variables \n\n// subject\n\nmsg.topic = \"i-Brew Delivery Advice\"; // subject\n\n//message\n\nmsg.payload = ` <head> <h1> Temperature Now Safe Levels. </h1> </head > \n<body> <h2> Basically, you got away with it. </h2>  \n<p> P.S. Local fire services have been stood down! </p> </body>`; // message to\n\nmsg.to = person ;  // to\n\n//from\n\nmsg.from = \"MQTT Monitoring Services\";  // from\n\n// msg.cc = \"mryan@eoguk.com\";  // cc\n\nconsole.log('before safe')\n\nreturn msg;",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 480,
+        "wires": [
+            [
+                "b73d14f5e53f6766"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6b537dc0bed252f2",
+        "type": "gate",
+        "z": "6ffdd1695a5059d0",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 550,
+        "y": 340,
+        "wires": [
+            [
+                "75bcba6ad114a696",
+                "778d3114a6116fd0"
+            ]
+        ]
+    },
+    {
+        "id": "5c94320c3bb5daf5",
+        "type": "inject",
+        "z": "6ffdd1695a5059d0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "6b537dc0bed252f2"
+            ]
+        ]
+    },
+    {
+        "id": "757645e317755dcb",
+        "type": "function",
+        "z": "6ffdd1695a5059d0",
+        "name": "Set form entries.  ",
+        "func": "\nlet threshold1 = flow.get('threshold')\nlet email1 = flow.get('email')\n\nflow.set('nowok', 0)//\nflow.set('told', 0)\n\nif (msg.payload.threshold != null)  \n{\n    flow.set('threshold', msg.payload.threshold) \n}\n    \nelse \n{ \n    \n    (msg.payload.threshold = threshold1)\n\n} \n\nif (msg.payload.email != \"\") \n{\n\n    flow.set('email', msg.payload.email)\n} \n\nelse \n{\n    (msg.payload.email = email1)\n\n} \n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 480,
+        "wires": [
+            [
+                "0b14ad6fbf5be106"
+            ]
+        ]
+    },
+    {
+        "id": "7a6f5181bfd0df10",
+        "type": "ui_gauge",
+        "z": "6ffdd1695a5059d0",
+        "name": "",
+        "group": "cb2867459c8e3cc6",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "•C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 1170,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "37931d97dd826ffc",
+        "type": "comment",
+        "z": "6ffdd1695a5059d0",
+        "name": "Record Temp and Humidity on Gauge.  Warn if too high, reassure when temp drops",
+        "info": "",
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3a2dce783a4f6a56",
+        "type": "mqtt in",
+        "z": "6ffdd1695a5059d0",
+        "name": "",
+        "topic": "C4:4F:33:5B:4D:01",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "362b264118b762de",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "6b537dc0bed252f2"
+            ]
+        ]
+    },
+    {
+        "id": "cb2867459c8e3cc6",
+        "type": "ui_group",
+        "name": "Inputs",
+        "tab": "9ee35c5250ed1cc9",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "362b264118b762de",
+        "type": "mqtt-broker",
+        "name": " xCYFgVEx-8wfhFXfn",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9ee35c5250ed1cc9",
+        "type": "ui_tab",
+        "name": "Sensor",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

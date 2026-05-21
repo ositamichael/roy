@@ -1,0 +1,716 @@
+[
+    {
+        "id": "3facbb75c9eb9d17",
+        "type": "group",
+        "z": "73995227d6e88105",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "6dd94da3b51e7c73",
+            "80dbe9002ac7e745",
+            "1ed124f0bbc857e2",
+            "38167232f3ce143d",
+            "3f833bae01734737",
+            "bb1be0b2790644b7",
+            "3f93168ec2f6a953"
+        ],
+        "x": 1274,
+        "y": 2059,
+        "w": 412,
+        "h": 342
+    },
+    {
+        "id": "6dd94da3b51e7c73",
+        "type": "delay",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1400,
+        "y": 2320,
+        "wires": [
+            [
+                "80dbe9002ac7e745"
+            ]
+        ]
+    },
+    {
+        "id": "80dbe9002ac7e745",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "name": "function 68",
+        "func": "let nowok = flow.get('nowok') \n\nif (nowok == 1) {\n\nmsg.payload = 'toggle' }\n\nif (nowok == 0) {\n\n    msg.payload = '0'\n}\n\nmsg.topic = 'control'\nreturn msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1470,
+        "y": 2260,
+        "wires": [
+            [
+                "38167232f3ce143d",
+                "bb1be0b2790644b7",
+                "1ed124f0bbc857e2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "1ed124f0bbc857e2",
+        "type": "debug",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "name": "debug 220",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1570,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "38167232f3ce143d",
+        "type": "toggle",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "name": "",
+        "onOffTopic": "topic",
+        "onValue": "1",
+        "onType": "num",
+        "offValue": "0",
+        "offType": "num",
+        "toggleTopic": "",
+        "toggleValue": "toggle",
+        "toggleType": "str",
+        "passOnOff": "always",
+        "x": 1410,
+        "y": 2160,
+        "wires": [
+            [
+                "6dd94da3b51e7c73",
+                "bb1be0b2790644b7"
+            ]
+        ]
+    },
+    {
+        "id": "3f833bae01734737",
+        "type": "ui_toast",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "position": "top right",
+        "displayTime": "10",
+        "highlight": "red",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "OVERHEAT!!",
+        "name": "Overheat",
+        "x": 1480,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "bb1be0b2790644b7",
+        "type": "ui_led",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "order": 2,
+        "group": "65dfd687.bc39a8",
+        "width": "2",
+        "height": "2",
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#000000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 1590,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "3f93168ec2f6a953",
+        "type": "comment",
+        "z": "73995227d6e88105",
+        "g": "3facbb75c9eb9d17",
+        "name": "Additional Warning Visuals",
+        "info": "",
+        "x": 1410,
+        "y": 2100,
+        "wires": []
+    },
+    {
+        "id": "65dfd687.bc39a8",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "5394d338.3dd19c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "5394d338.3dd19c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a670e706e9afa03a",
+        "type": "group",
+        "z": "73995227d6e88105",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "f960706285cf85f3",
+            "9f202ecd9e0d2ec9",
+            "fdff180b7928bee5",
+            "92ac7678383fb3f6",
+            "9c25694f0c9c7b60",
+            "b9de0507d85544fe",
+            "a435411eb1e780ad",
+            "03e7c2cf87402073"
+        ],
+        "x": 254,
+        "y": 2439,
+        "w": 1052,
+        "h": 242
+    },
+    {
+        "id": "f960706285cf85f3",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "Send Warning",
+        "func": "//var person = global.get('email') || 0;\n\n//var person ='mryan@eoguk.com'\n//var person = 'email'\n\nvar person = flow.get('email') \n//var person = 'josh.ryan@eoguk.com'\n\n// populate email variables \n\n// subject\n\nmsg.topic = \"i-Brew Delivery Advice\"; // subject\n\n//message\n\nmsg.payload = ` <head> <h1> Temperature Exceding Safe Levels. </h1> </head > \n<body> <h2> Basically the server is on fire. </h2>  \n<p> P.S. Local fire services should probably be notified! </p> </body>`; // message to\n\nmsg.to = person ;  // to\n\n//from\n\nmsg.from = \"MQTT Monitoring Services\";  // from\n\n// msg.cc = \"mryan@eoguk.com\";  // cc\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 2540,
+        "wires": [
+            [
+                "a435411eb1e780ad"
+            ]
+        ]
+    },
+    {
+        "id": "9f202ecd9e0d2ec9",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "Gate protocol",
+        "func": "let threshold = flow.get('threshold') \nlet told = flow.get('told') || 0;\nlet nowok = flow.get('nowok') || 0;\n\nconsole.log('tempupin', threshold, told, nowok)\n\nlet payload = msg.payload;\n\nif (payload > threshold) {\n    \n    if (told === 0)   {\n    console.log('tested Zero',told)\n           flow.set('told', 1)\n        told = 1\n        flow.set('nowok', 0)\n        nowok = 0\n        msg.payload = 'toggle'\n        return [msg, null, null];\n    }\n\n    console.log('temp high', told)\n    \n\n    }\n\nif (payload <= threshold) {\n\n    if (nowok === 0) {\n\n        flow.set('told', 0)\n        told = 0\n        flow.set('nowok', 1)\n        nowok = 1\n        msg.payload = '0' \n        return [null, msg, null];\n    }\n\n    console.log('temp cool', told)\n\n    \n}\nconsole.log('Drop-out...')\nreturn [null, null, msg]",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 2560,
+        "wires": [
+            [
+                "f960706285cf85f3",
+                "3f833bae01734737",
+                "80dbe9002ac7e745"
+            ],
+            [
+                "fdff180b7928bee5"
+            ],
+            [
+                "92ac7678383fb3f6"
+            ]
+        ]
+    },
+    {
+        "id": "fdff180b7928bee5",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "Rescind Warning",
+        "func": "//var person = global.get('cmail') || 0;\nvar person ='mryan@eoguk.com'\n\n// populate email variables \n\n// subject\n\nmsg.topic = \"i-Brew Delivery Advice\"; // subject\n\n//message\n\nmsg.payload = ` <head> <h1> Temperature Now Safe Levels. </h1> </head > \n<body> <h2> Basically, you got away with it. </h2>  \n<p> P.S. Local fire services have been stood down! </p> </body>`; // message to\n\nmsg.to = person ;  // to\n\n//from\n\nmsg.from = \"MQTT Monitoring Services\";  // from\n\n// msg.cc = \"mryan@eoguk.com\";  // cc\n\nconsole.log('before safe')\n\nreturn msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 2580,
+        "wires": [
+            [
+                "a435411eb1e780ad"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "92ac7678383fb3f6",
+        "type": "debug",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "debug 221",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 950,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "9c25694f0c9c7b60",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "Set form entries.  ",
+        "func": "\nlet threshold1 = flow.get('threshold')\nlet email1 = flow.get('email')\n\nflow.set('nowok', 0)//\nflow.set('told', 0)\n\nif (msg.payload.threshold != null)  \n{\n    flow.set('threshold', msg.payload.threshold) \n}\n    \nelse \n{ \n    \n    (msg.payload.threshold = threshold1)\n\n} \n\nif (msg.payload.email != \"\") \n{\n\n    flow.set('email', msg.payload.email)\n} \n\nelse \n{\n    (msg.payload.email = email1)\n\n} \n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 2560,
+        "wires": [
+            [
+                "9f202ecd9e0d2ec9",
+                "b9de0507d85544fe"
+            ]
+        ]
+    },
+    {
+        "id": "b9de0507d85544fe",
+        "type": "debug",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "debug 222",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 630,
+        "y": 2640,
+        "wires": []
+    },
+    {
+        "id": "a435411eb1e780ad",
+        "type": "e-mail",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "",
+        "x": 1230,
+        "y": 2560,
+        "wires": []
+    },
+    {
+        "id": "03e7c2cf87402073",
+        "type": "comment",
+        "z": "73995227d6e88105",
+        "g": "a670e706e9afa03a",
+        "name": "Record Temp and Humidity on Gauge.  Warn if too high, reassure when temp drops",
+        "info": "",
+        "x": 570,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "fb891730a8c73b46",
+        "type": "group",
+        "z": "73995227d6e88105",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "88defd99d0debd58",
+            "1cec0c7782015fd9",
+            "dac816ada0b65c99",
+            "2d1a6c0735ae2f7b",
+            "bf05081cac0ac439",
+            "5efd573807bd202d"
+        ],
+        "x": 134,
+        "y": 1899,
+        "w": 1072,
+        "h": 162
+    },
+    {
+        "id": "88defd99d0debd58",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "Extract Payload T",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.temperature_c;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 2020,
+        "wires": [
+            [
+                "bf05081cac0ac439"
+            ]
+        ]
+    },
+    {
+        "id": "1cec0c7782015fd9",
+        "type": "function",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "Extract Payload H",
+        "func": "let payload = msg.payload\nlet tempc =payload.data.humidity;\n//Console=('temperature', tempc)\n\nmsg.payload = tempc\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 1960,
+        "wires": [
+            [
+                "2d1a6c0735ae2f7b"
+            ]
+        ]
+    },
+    {
+        "id": "dac816ada0b65c99",
+        "type": "inject",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.data.humidity",
+                "v": "55.3",
+                "vt": "str"
+            },
+            {
+                "p": "payload.data.temperature_c",
+                "v": "26.9",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 2000,
+        "wires": [
+            [
+                "1cec0c7782015fd9",
+                "88defd99d0debd58"
+            ]
+        ]
+    },
+    {
+        "id": "2d1a6c0735ae2f7b",
+        "type": "ui_gauge",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "Humid 1",
+        "group": "cb2867459c8e3cc6",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "RH",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1120,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "bf05081cac0ac439",
+        "type": "ui_gauge",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "Temp 1",
+        "group": "cb2867459c8e3cc6",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "•C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1120,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "5efd573807bd202d",
+        "type": "comment",
+        "z": "73995227d6e88105",
+        "g": "fb891730a8c73b46",
+        "name": "Gauges - Stage 1",
+        "info": "",
+        "x": 240,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "cb2867459c8e3cc6",
+        "type": "ui_group",
+        "name": "Inputs",
+        "tab": "9ee35c5250ed1cc9",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9ee35c5250ed1cc9",
+        "type": "ui_tab",
+        "name": "Sensor",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d2e159d8db776e74",
+        "type": "group",
+        "z": "73995227d6e88105",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "582b92cc544f7ca4",
+            "dad1f370f429c328",
+            "9e9413feb5ff6d6d",
+            "344f75b5818dbc9f"
+        ],
+        "x": 134,
+        "y": 2099,
+        "w": 532,
+        "h": 202
+    },
+    {
+        "id": "582b92cc544f7ca4",
+        "type": "gate",
+        "z": "73995227d6e88105",
+        "g": "d2e159d8db776e74",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "closed",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 590,
+        "y": 2220,
+        "wires": [
+            [
+                "88defd99d0debd58",
+                "1cec0c7782015fd9",
+                "9f202ecd9e0d2ec9"
+            ]
+        ]
+    },
+    {
+        "id": "dad1f370f429c328",
+        "type": "inject",
+        "z": "73995227d6e88105",
+        "g": "d2e159d8db776e74",
+        "name": "Toggle the Gate",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 260,
+        "y": 2260,
+        "wires": [
+            [
+                "582b92cc544f7ca4"
+            ]
+        ]
+    },
+    {
+        "id": "9e9413feb5ff6d6d",
+        "type": "mqtt in",
+        "z": "73995227d6e88105",
+        "g": "d2e159d8db776e74",
+        "name": "",
+        "topic": "C4:4F:33:5B:4D:01",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "362b264118b762de",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 2180,
+        "wires": [
+            [
+                "582b92cc544f7ca4"
+            ]
+        ]
+    },
+    {
+        "id": "344f75b5818dbc9f",
+        "type": "comment",
+        "z": "73995227d6e88105",
+        "g": "d2e159d8db776e74",
+        "name": "Gauges - Stage 2",
+        "info": "",
+        "x": 240,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "362b264118b762de",
+        "type": "mqtt-broker",
+        "name": " xCYFgVEx-8wfhFXfn",
+        "broker": "node02.myqtthub.com",
+        "port": "1883",
+        "clientid": "mryan@eoguk.com",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

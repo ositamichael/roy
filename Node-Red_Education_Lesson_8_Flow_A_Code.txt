@@ -1,0 +1,211 @@
+[
+    {
+        "id": "0f89c9ad639fbedd",
+        "type": "function",
+        "z": "0af65cac5abf68ba",
+        "name": "Set UPDATE SQL for Cust. Order Address",
+        "func": "// Bring in the payload and place into variables for this process\n\nlet order  =  msg.payload.FODORNO\nlet cuname =  msg.payload.FODCUNM\nlet addr1 = msg.payload.FODCUA1\nlet addr2 = msg.payload.FODCUA2\nlet addr3 = msg.payload.FODCUA3\nlet addr4 = msg.payload.FODCUA4\nlet pono = msg.payload.FODPONO\n\n\n// Build the SQL statement, only SET the column if the value from the Forms Node is NOT null/blank\n\nlet payloadout = `update iugred.cusordadd set \n                        ODCUNM = CASE WHEN '${cuname}' > '' THEN '${cuname}' ELSE ODCUNM END, \n                        ODCUA1 = CASE WHEN '${addr1}' > '' THEN '${addr1}' ELSE ODCUA1 END, \n                        ODCUA2 = CASE WHEN '${addr2}' > '' THEN '${addr2}' ELSE ODCUA2 END,\n                        ODCUA3 = CASE WHEN '${addr3}' > '' THEN '${addr3}' ELSE ODCUA3 END,\n                        ODCUA4 = CASE WHEN '${addr4}' > '' THEN '${addr4}' ELSE ODCUA4 END,\n                        ODPONO = CASE WHEN '${pono}' > '' THEN '${pono}' ELSE ODPONO END                        \n                   WHERE ODORNO = '${order}' `\n\n\n\n//  Store the SQL statement in the msg.payload   , when '${addr1}' > ' ' then set ODADR1 = '${addr1}';\n\nmsg.payload = payloadout\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 220,
+        "wires": [
+            [
+                "3111aa1e94ed1672",
+                "1bede0c92ed04f2a"
+            ]
+        ]
+    },
+    {
+        "id": "1bede0c92ed04f2a",
+        "type": "debug",
+        "z": "0af65cac5abf68ba",
+        "name": "debug 200",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "20c4b1686d8bb21d",
+        "type": "inject",
+        "z": "0af65cac5abf68ba",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.FODORNO",
+                "v": "S105120",
+                "vt": "str"
+            },
+            {
+                "p": "payload.FODCUA2",
+                "v": "POSTBUS 200",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "0f89c9ad639fbedd",
+                "4e982dd93acce1bf"
+            ]
+        ]
+    },
+    {
+        "id": "4e982dd93acce1bf",
+        "type": "debug",
+        "z": "0af65cac5abf68ba",
+        "name": "debug 207",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "479d2a6f1c1f022b",
+        "type": "ui_form",
+        "z": "0af65cac5abf68ba",
+        "name": "",
+        "label": "",
+        "group": "9d287efb8374deaf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Sales Order Number",
+                "value": "FODORNO",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Customer Name",
+                "value": "FODCUNM",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA1",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA2",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Order Address",
+                "value": "FODCUA3",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Country",
+                "value": "FODCUA4",
+                "type": "text",
+                "required": false,
+                "rows": null
+            },
+            {
+                "label": "Post Code",
+                "value": "FODPONO",
+                "type": "text",
+                "required": false,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "FODORNO": "",
+            "FODCUNM": "",
+            "FODCUA1": "",
+            "FODCUA2": "",
+            "FODCUA3": "",
+            "FODCUA4": "",
+            "FODPONO": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 210,
+        "y": 320,
+        "wires": [
+            [
+                "0f89c9ad639fbedd"
+            ]
+        ]
+    },
+    {
+        "id": "3111aa1e94ed1672",
+        "type": "DB2 for i",
+        "z": "0af65cac5abf68ba",
+        "mydb": "c783136d02b66193",
+        "name": "",
+        "arraymode": true,
+        "x": 880,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d287efb8374deaf",
+        "type": "ui_group",
+        "name": "Input",
+        "tab": "d9f6bdd78416d845",
+        "order": 1,
+        "disp": true,
+        "width": 11,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c783136d02b66193",
+        "type": "DB2 for i Config",
+        "cnnname": "MikeR",
+        "db": "*LOCAL",
+        "keepalive": true
+    },
+    {
+        "id": "d9f6bdd78416d845",
+        "type": "ui_tab",
+        "name": "Table Output",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
