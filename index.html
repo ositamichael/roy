@@ -205,6 +205,30 @@
       padding:30px;
     }
 
+    .cert-img-link{
+      display:block;
+      margin-bottom:20px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#fff;
+      box-shadow:0 20px 55px rgba(0,0,0,.3);
+    }
+
+    .cert-img{
+      width:100%;
+      height:360px;
+      object-fit:cover;
+      object-position:center;
+      transition:.25s ease;
+      background:#fff;
+    }
+
+    .cert-img-link:hover .cert-img{
+      transform:scale(1.03);
+      filter:brightness(.95);
+    }
+
     .social-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -258,6 +282,7 @@
       }
 
       .grid,.grid2,.certificate-card,.social-grid{grid-template-columns:1fr}
+      .cert-img{height:auto;max-height:520px;object-fit:contain}
     }
 
     @media(max-width:520px){
@@ -434,20 +459,26 @@
   <h2>Certificates.</h2>
   <div class="certificate-card">
     <div class="cert-box">
+      <a class="cert-img-link" href="showcase-certificate.pdf" target="_blank">
+        <img class="cert-img" src="showcase-certificate.png" alt="Computing and Engineering Showcase Certificate">
+      </a>
       <h3>Computing & Engineering Showcase Representative</h3>
       <p>Selected to represent BSc Computer Science at the Leeds Beckett University Computing and Engineering Showcase on 20 May 2026.</p>
       <div class="tags"><span>Leeds Beckett University</span><span>Computer Science</span><span>Showcase</span></div>
       <div class="project-actions">
-        <a class="btn primary" href="CamScanner%2016-06-2026%2016.30.pdf" target="_blank">View Certificate</a>
+        <a class="btn primary" href="showcase-certificate.pdf" target="_blank">View Certificate</a>
       </div>
     </div>
 
     <div class="cert-box">
+      <a class="cert-img-link" href="node-red-certificate.pdf" target="_blank">
+        <img class="cert-img" src="node-red-certificate.png" alt="i-UG Node-RED Education Course Certificate">
+      </a>
       <h3>i-UG Node-RED Education Course</h3>
       <p>Completed the i-UG Node-RED education course and successfully addressed the Brewery Challenge.</p>
       <div class="tags"><span>Node-RED</span><span>IoT</span><span>Automation</span></div>
       <div class="project-actions">
-        <a class="btn primary" href="CamScanner%2016-06-2026%2016.31.pdf" target="_blank">View Certificate</a>
+        <a class="btn primary" href="node-red-certificate.pdf" target="_blank">View Certificate</a>
       </div>
     </div>
   </div>
