@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Osita Michael | Portfolio</title>
+
   <style>
     :root{
       --bg:#151515;
@@ -14,67 +15,252 @@
       --card:#202020;
       --line:rgba(255,255,255,.12);
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
     a{text-decoration:none;color:inherit}
-    header{background:#252525;position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--line)}
-    nav{max-width:1150px;margin:auto;padding:34px 26px;display:flex;justify-content:space-between;align-items:center}
-    .logo{font-size:clamp(2.4rem,7vw,4rem);font-weight:900;letter-spacing:-3px}
+
+    header{
+      background:#252525;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      border-bottom:1px solid var(--line);
+    }
+
+    nav{
+      max-width:1180px;
+      margin:auto;
+      padding:34px 26px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:clamp(2.4rem,7vw,4rem);
+      font-weight:900;
+      letter-spacing:-3px;
+    }
+
     .navlinks{display:flex;gap:22px;font-weight:800;color:#ddd}
     .navlinks a:hover{color:var(--blue)}
+
     .hamburger{display:none;background:none;border:0;width:70px}
     .hamburger span{display:block;height:7px;background:#fff;border-radius:20px;margin:8px 0}
+
     .mobile{display:none;background:#222;padding:0 26px 24px}
     .mobile a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:1.2rem;font-weight:800}
 
-    section{max-width:1150px;margin:auto;padding:85px 26px}
-    .hero{text-align:center;min-height:86vh;display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at center,#202020 0%,#151515 65%)}
-    .eyebrow{letter-spacing:.45em;text-transform:uppercase;color:#ddd;font-size:clamp(1rem,4vw,1.55rem);margin-bottom:28px}
-    h1{font-size:clamp(4.4rem,14vw,8.5rem);line-height:.9;letter-spacing:-7px;margin-bottom:38px}
-    .hero p{font-size:clamp(1.65rem,5vw,2.5rem);line-height:1.45;color:#e4e4e4;max-width:900px;margin:0 auto 44px}
-    .btn{display:inline-block;background:#2c2c2c;border:1px solid var(--line);padding:15px 24px;border-radius:999px;font-weight:900}
-    .btn.primary{background:var(--blue);border-color:var(--blue);font-size:clamp(1.1rem,4vw,1.45rem);padding:20px 48px}
-    .btns{display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
+    section{max-width:1180px;margin:auto;padding:90px 26px}
 
-    h2{font-size:clamp(4rem,14vw,8rem);line-height:.9;letter-spacing:-7px;margin-bottom:45px}
+    .hero{
+      min-height:calc(100vh - 120px);
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:48px;
+      align-items:center;
+      background:radial-gradient(circle at center,#202020 0%,#151515 65%);
+    }
+
+    .hero-text{text-align:left}
+
+    .eyebrow{
+      letter-spacing:.45em;
+      text-transform:uppercase;
+      color:#ddd;
+      font-size:clamp(.9rem,2.2vw,1.25rem);
+      margin-bottom:28px;
+    }
+
+    h1{
+      font-size:clamp(4.2rem,10vw,8rem);
+      line-height:.9;
+      letter-spacing:-7px;
+      margin-bottom:34px;
+    }
+
+    .hero p{
+      font-size:clamp(1.35rem,3.4vw,2.1rem);
+      line-height:1.45;
+      color:#e4e4e4;
+      max-width:760px;
+      margin-bottom:40px;
+    }
+
+    .btns{display:flex;gap:15px;flex-wrap:wrap}
+    .btn{
+      display:inline-block;
+      background:#2c2c2c;
+      border:1px solid var(--line);
+      padding:15px 24px;
+      border-radius:999px;
+      font-weight:900;
+    }
+
+    .btn.primary{
+      background:var(--blue);
+      border-color:var(--blue);
+      font-size:1.25rem;
+      padding:18px 44px;
+    }
+
+    .photo-wrap{
+      width:100%;
+      height:720px;
+      max-height:78vh;
+      border-radius:38px;
+      overflow:hidden;
+      background:#222;
+      box-shadow:0 35px 95px rgba(0,0,0,.45), 0 0 70px rgba(19,152,211,.12);
+      border:1px solid var(--line);
+    }
+
+    .photo-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center 42%;
+      display:block;
+    }
+
+    .fallback{
+      height:100%;
+      display:grid;
+      place-items:center;
+      color:#111;
+      background:#eee;
+      font-size:6rem;
+      font-weight:900;
+    }
+
+    h2{
+      font-size:clamp(4rem,12vw,8rem);
+      line-height:.9;
+      letter-spacing:-7px;
+      margin-bottom:45px;
+    }
+
     h3{font-size:1.55rem;margin-bottom:12px}
     p,li{color:var(--muted);font-size:1.05rem}
-    .band{max-width:none;background:#202020;padding-left:max(26px,calc((100vw - 1150px)/2 + 26px));padding-right:max(26px,calc((100vw - 1150px)/2 + 26px))}
+
+    .band{
+      max-width:none;
+      background:#202020;
+      padding-left:max(26px,calc((100vw - 1180px)/2 + 26px));
+      padding-right:max(26px,calc((100vw - 1180px)/2 + 26px));
+    }
+
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-    .card{background:#242424;border:1px solid var(--line);border-radius:28px;padding:30px}
-    .card ul{list-style:none;display:grid;gap:10px}
-    .project{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
-    .tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
-    .tags span{background:rgba(19,152,211,.16);border:1px solid rgba(19,152,211,.35);color:#6fd0ff;padding:7px 12px;border-radius:999px;font-weight:800;font-size:.85rem}
-    .timeline{display:grid;gap:22px}
-    .timeline .item{background:#242424;border-radius:25px;border-left:7px solid var(--blue);padding:28px}
-    .date{color:#6fd0ff;font-weight:900;margin-bottom:7px}
-    .photo-wrap{max-width:430px;margin:35px auto 0;background:#eee;border-radius:0 0 35px 35px;overflow:hidden;box-shadow:0 30px 70px rgba(255,255,255,.12)}
-    .photo-wrap img{width:100%;height:500px;object-fit:cover;object-position:center}
-    .fallback{height:500px;display:grid;place-items:center;color:#111;font-size:6rem;font-weight:900}
-    .contact{text-align:center}
-    footer{text-align:center;padding:34px;color:#aaa;background:#111;border-top:1px solid var(--line)}
 
-    @media(max-width:850px){
-      .navlinks{display:none}.hamburger{display:block}.mobile.show{display:block}
+    .card{
+      background:#242424;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:30px;
+    }
+
+    .card ul{list-style:none;display:grid;gap:10px}
+
+    .project{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+
+    .tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+    .tags span{
+      background:rgba(19,152,211,.16);
+      border:1px solid rgba(19,152,211,.35);
+      color:#6fd0ff;
+      padding:7px 12px;
+      border-radius:999px;
+      font-weight:800;
+      font-size:.85rem;
+    }
+
+    .timeline{display:grid;gap:22px}
+    .timeline .item{
+      background:#242424;
+      border-radius:25px;
+      border-left:7px solid var(--blue);
+      padding:28px;
+    }
+
+    .date{color:#6fd0ff;font-weight:900;margin-bottom:7px}
+    .contact{text-align:center}
+
+    footer{
+      text-align:center;
+      padding:34px;
+      color:#aaa;
+      background:#111;
+      border-top:1px solid var(--line);
+    }
+
+    @media(max-width:900px){
+      .navlinks{display:none}
+      .hamburger{display:block}
+      .mobile.show{display:block}
+
       section{padding:75px 24px}
-      .grid,.grid2{grid-template-columns:1fr}
+
+      .hero{
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        text-align:center;
+        gap:35px;
+      }
+
+      .hero-text{text-align:center}
+      .btns{justify-content:center}
+
       h1,h2{letter-spacing:-4px}
-      .photo-wrap img,.fallback{height:430px}
+
+      .photo-wrap{
+        width:100%;
+        height:680px;
+        max-height:none;
+        border-radius:34px;
+        margin-top:20px;
+      }
+
+      .photo-wrap img{
+        object-fit:cover;
+        object-position:center 45%;
+      }
+
+      .grid,.grid2{grid-template-columns:1fr}
+    }
+
+    @media(max-width:520px){
+      .photo-wrap{
+        height:620px;
+        width:100%;
+      }
+
+      .btn.primary{
+        width:100%;
+        text-align:center;
+      }
     }
   </style>
 </head>
+
 <body>
 <header>
   <nav>
     <a class="logo" href="#home">Osita Michael</a>
     <div class="navlinks">
-      <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
+
   <div class="mobile" id="mobileMenu">
     <a onclick="toggleMenu()" href="#about">About</a>
     <a onclick="toggleMenu()" href="#skills">Skills</a>
@@ -87,17 +273,19 @@
 
 <main>
 <section class="hero" id="home">
-  <div class="eyebrow">Computer Science Student</div>
-  <h1>Hi, I'm Osita Michael</h1>
-  <p>I am passionate about technology, software development, and the power of digital innovation to transform the world.</p>
-  <div class="btns">
-    <a class="btn primary" href="#projects">View Projects</a>
-    <a class="btn" href="#contact">Contact Me</a>
-    <a class="btn" href="MICHAELOSITACV(2).pdf" target="_blank">Download CV</a>
+  <div class="hero-text">
+    <div class="eyebrow">Computer Science Student</div>
+    <h1>Hi, I'm Osita Michael</h1>
+    <p>I am passionate about technology, software development, artificial intelligence, data analysis, and building digital innovation that solves real-world problems.</p>
+    <div class="btns">
+      <a class="btn primary" href="#projects">View Projects</a>
+      <a class="btn" href="#contact">Contact Me</a>
+      <a class="btn" href="MICHAELOSITACV(2).pdf" target="_blank">Download CV</a>
+    </div>
   </div>
 
   <div class="photo-wrap">
-    <img id="profilePhoto" alt="Osita Michael">
+    <img id="profilePhoto" src="profile.jpg" alt="Osita Michael" onerror="this.style.display='none';document.getElementById('fallbackAvatar').style.display='grid';">
     <div id="fallbackAvatar" class="fallback" style="display:none;">OM</div>
   </div>
 </section>
@@ -157,7 +345,7 @@
 <section class="band contact" id="contact">
   <h2>Contact.</h2>
   <p>Leeds, United Kingdom · Open to hybrid and remote roles</p>
-  <div class="btns" style="margin-top:28px">
+  <div class="btns" style="margin-top:28px;justify-content:center">
     <a class="btn primary" href="mailto:M.Osita9443@student.leedsbeckett.ac.uk">Email Me</a>
     <a class="btn" href="tel:07474254700">Call</a>
     <a class="btn" href="https://www.linkedin.com/in/osita-michael-b4505b344" target="_blank">LinkedIn</a>
@@ -169,29 +357,9 @@
 <footer>© 2026 Osita Michael. Software Developer · AI & Data Enthusiast.</footer>
 
 <script>
-function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("show")}
-
-const imageFiles=[
-"B09DCDED-CCDD-410E-9714-5385360439B3.jpeg",
-"B09DCDED-CCDD-410E-9714-5385360439B3.jpg",
-"B09DCDED-CCDD-410E-9714-5385360439B3.png",
-"profile.jpg","profile.jpeg","profile.png",
-"photo.jpg","photo.jpeg","photo.png",
-"osita.jpg","osita.jpeg","osita.png",
-"image.jpg","image.jpeg","image.png"
-];
-
-const img=document.getElementById("profilePhoto");
-const fallback=document.getElementById("fallbackAvatar");
-let i=0;
-function tryImage(){
-  if(i>=imageFiles.length){img.style.display="none";fallback.style.display="grid";return;}
-  const test=new Image();
-  test.onload=()=>{img.src=imageFiles[i];img.style.display="block";fallback.style.display="none";}
-  test.onerror=()=>{i++;tryImage();}
-  test.src=imageFiles[i];
+function toggleMenu(){
+  document.getElementById("mobileMenu").classList.toggle("show");
 }
-tryImage();
 </script>
 </body>
 </html>
