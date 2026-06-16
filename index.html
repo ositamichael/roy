@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Osita Michael | Portfolio</title>
+  <title>Osita Michael | Software Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Osita Michael, Computer Science student, Software Developer, AI & Data Enthusiast." />
 
   <style>
     :root{
       --bg:#151515;
-      --dark:#242424;
-      --text:#ffffff;
+      --dark:#222;
+      --card:#242424;
+      --card2:#2c2c2c;
+      --text:#fff;
       --muted:#d6d6d6;
+      --soft:#aaa;
       --blue:#1398d3;
-      --card:#202020;
       --line:rgba(255,255,255,.12);
     }
 
@@ -20,51 +23,50 @@
     html{scroll-behavior:smooth}
     body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
     a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
 
     header{
       background:#252525;
       position:sticky;
       top:0;
-      z-index:1000;
+      z-index:999;
       border-bottom:1px solid var(--line);
     }
 
     nav{
       max-width:1180px;
       margin:auto;
-      padding:34px 26px;
+      padding:28px 24px;
       display:flex;
       justify-content:space-between;
       align-items:center;
     }
 
     .logo{
-      font-size:clamp(2.4rem,7vw,4rem);
+      font-size:clamp(2.1rem,6vw,4rem);
       font-weight:900;
       letter-spacing:-3px;
     }
 
-    .navlinks{display:flex;gap:22px;font-weight:800;color:#ddd}
+    .navlinks{display:flex;gap:20px;font-weight:800;color:#ddd}
     .navlinks a:hover{color:var(--blue)}
 
-    .hamburger{display:none;background:none;border:0;width:70px}
+    .hamburger{display:none;background:none;border:0;width:68px}
     .hamburger span{display:block;height:7px;background:#fff;border-radius:20px;margin:8px 0}
 
-    .mobile{display:none;background:#222;padding:0 26px 24px}
-    .mobile a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:1.2rem;font-weight:800}
+    .mobile{display:none;background:#222;padding:0 24px 24px}
+    .mobile a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:1.15rem;font-weight:800}
 
-    section{max-width:1180px;margin:auto;padding:90px 26px}
+    section{max-width:1180px;margin:auto;padding:90px 24px}
 
     .hero{
-      min-height:calc(100vh - 120px);
+      min-height:calc(100vh - 110px);
       display:grid;
       grid-template-columns:1.05fr .95fr;
-      gap:48px;
+      gap:46px;
       align-items:center;
       background:radial-gradient(circle at center,#202020 0%,#151515 65%);
     }
-
-    .hero-text{text-align:left}
 
     .eyebrow{
       letter-spacing:.45em;
@@ -81,8 +83,18 @@
       margin-bottom:34px;
     }
 
+    h2{
+      font-size:clamp(3.8rem,11vw,8rem);
+      line-height:.9;
+      letter-spacing:-7px;
+      margin-bottom:45px;
+    }
+
+    h3{font-size:1.55rem;margin-bottom:12px}
+    p,li{color:var(--muted);font-size:1.05rem}
+
     .hero p{
-      font-size:clamp(1.35rem,3.4vw,2.1rem);
+      font-size:clamp(1.3rem,3.4vw,2rem);
       line-height:1.45;
       color:#e4e4e4;
       max-width:760px;
@@ -97,19 +109,22 @@
       padding:15px 24px;
       border-radius:999px;
       font-weight:900;
+      transition:.2s ease;
     }
 
     .btn.primary{
       background:var(--blue);
       border-color:var(--blue);
-      font-size:1.25rem;
+      font-size:1.2rem;
       padding:18px 44px;
     }
 
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+
     .photo-wrap{
       width:100%;
-      height:720px;
-      max-height:78vh;
+      height:740px;
+      max-height:80vh;
       border-radius:38px;
       overflow:hidden;
       background:#222;
@@ -121,8 +136,7 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      object-position:center 42%;
-      display:block;
+      object-position:center 44%;
     }
 
     .fallback{
@@ -135,36 +149,26 @@
       font-weight:900;
     }
 
-    h2{
-      font-size:clamp(4rem,12vw,8rem);
-      line-height:.9;
-      letter-spacing:-7px;
-      margin-bottom:45px;
-    }
-
-    h3{font-size:1.55rem;margin-bottom:12px}
-    p,li{color:var(--muted);font-size:1.05rem}
-
     .band{
       max-width:none;
       background:#202020;
-      padding-left:max(26px,calc((100vw - 1180px)/2 + 26px));
-      padding-right:max(26px,calc((100vw - 1180px)/2 + 26px));
+      padding-left:max(24px,calc((100vw - 1180px)/2 + 24px));
+      padding-right:max(24px,calc((100vw - 1180px)/2 + 24px));
     }
 
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
 
     .card{
-      background:#242424;
+      background:var(--card);
       border:1px solid var(--line);
       border-radius:28px;
       padding:30px;
     }
 
     .card ul{list-style:none;display:grid;gap:10px}
-
-    .project{min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+    .project{min-height:330px;display:flex;flex-direction:column;justify-content:space-between}
+    .project-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
 
     .tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
     .tags span{
@@ -186,6 +190,49 @@
     }
 
     .date{color:#6fd0ff;font-weight:900;margin-bottom:7px}
+
+    .certificate-card{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .cert-box{
+      background:#242424;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:30px;
+    }
+
+    .cert-img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      object-position:center;
+      border-radius:20px;
+      border:1px solid var(--line);
+      margin-bottom:18px;
+      background:#fff;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .social{
+      background:#242424;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      text-align:center;
+      font-weight:900;
+    }
+
+    .social:hover{background:#2f2f2f;color:#6fd0ff}
+
     .contact{text-align:center}
 
     footer{
@@ -211,9 +258,7 @@
         gap:35px;
       }
 
-      .hero-text{text-align:center}
       .btns{justify-content:center}
-
       h1,h2{letter-spacing:-4px}
 
       .photo-wrap{
@@ -221,27 +266,14 @@
         height:680px;
         max-height:none;
         border-radius:34px;
-        margin-top:20px;
       }
 
-      .photo-wrap img{
-        object-fit:cover;
-        object-position:center 45%;
-      }
-
-      .grid,.grid2{grid-template-columns:1fr}
+      .grid,.grid2,.certificate-card,.social-grid{grid-template-columns:1fr}
     }
 
     @media(max-width:520px){
-      .photo-wrap{
-        height:620px;
-        width:100%;
-      }
-
-      .btn.primary{
-        width:100%;
-        text-align:center;
-      }
+      .photo-wrap{height:620px}
+      .btn.primary{width:100%;text-align:center}
     }
   </style>
 </head>
@@ -254,8 +286,8 @@
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#socials">Links</a>
       <a href="#contact">Contact</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -265,22 +297,22 @@
     <a onclick="toggleMenu()" href="#about">About</a>
     <a onclick="toggleMenu()" href="#skills">Skills</a>
     <a onclick="toggleMenu()" href="#projects">Projects</a>
-    <a onclick="toggleMenu()" href="#education">Education</a>
-    <a onclick="toggleMenu()" href="#experience">Experience</a>
+    <a onclick="toggleMenu()" href="#certificates">Certificates</a>
+    <a onclick="toggleMenu()" href="#socials">Links</a>
     <a onclick="toggleMenu()" href="#contact">Contact</a>
   </div>
 </header>
 
 <main>
 <section class="hero" id="home">
-  <div class="hero-text">
+  <div>
     <div class="eyebrow">Computer Science Student</div>
     <h1>Hi, I'm Osita Michael</h1>
     <p>I am passionate about technology, software development, artificial intelligence, data analysis, and building digital innovation that solves real-world problems.</p>
     <div class="btns">
       <a class="btn primary" href="#projects">View Projects</a>
       <a class="btn" href="#contact">Contact Me</a>
-      <a class="btn" href="MICHAELOSITACV(2).pdf" target="_blank">Download CV</a>
+      <a class="btn" href="MICHAELOSITACV(4).pdf" target="_blank">Download CV</a>
     </div>
   </div>
 
@@ -293,9 +325,18 @@
 <section class="band" id="about">
   <h2>About.</h2>
   <div class="grid">
-    <div class="card"><h3>Technical Foundation</h3><p>A motivated Software Developer with a strong foundation in Artificial Intelligence, Data Analysis, and Software Engineering.</p></div>
-    <div class="card"><h3>Practical Experience</h3><p>Experienced in building intelligent systems and real-world applications using modern programming tools and technologies.</p></div>
-    <div class="card"><h3>Driven to Grow</h3><p>Passionate about solving complex problems, creating efficient solutions, and growing in machine learning and full-stack development.</p></div>
+    <div class="card">
+      <h3>Software Development</h3>
+      <p>Computer Science student at Leeds Beckett University with experience in web development, backend systems, and real-world software projects.</p>
+    </div>
+    <div class="card">
+      <h3>AI & Data Enthusiast</h3>
+      <p>Interested in artificial intelligence, machine learning, data analysis, and using intelligent systems to solve practical problems.</p>
+    </div>
+    <div class="card">
+      <h3>Problem Solver</h3>
+      <p>Driven by curiosity, clean code, performance, and building scalable applications that are useful, maintainable, and user-friendly.</p>
+    </div>
   </div>
 </section>
 
@@ -304,18 +345,81 @@
   <div class="grid">
     <div class="card"><h3>Programming</h3><ul><li>Python</li><li>Java</li><li>JavaScript</li><li>SQL</li><li>C</li></ul></div>
     <div class="card"><h3>Web & Backend</h3><ul><li>HTML5 & CSS3</li><li>Django</li><li>SQLite</li><li>API Development</li><li>Object-Oriented Programming</li></ul></div>
-    <div class="card"><h3>Tools & Interests</h3><ul><li>GitHub</li><li>VS Code</li><li>Eclipse</li><li>IntelliJ IDEA</li><li>Machine Learning & IoT Systems</li></ul></div>
+    <div class="card"><h3>Tools & Interests</h3><ul><li>GitHub</li><li>Netlify</li><li>VS Code</li><li>Node-RED</li><li>Raspberry Pi</li></ul></div>
   </div>
 </section>
 
 <section class="band" id="projects">
   <h2>Projects.</h2>
   <div class="grid2">
-    <div class="card project"><div><h3>Diabetes Prediction System</h3><p>Machine learning model to predict diabetes risk using real-world health data, preprocessing, feature engineering, and classification modelling.</p><div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span></div></div><a class="btn" href="#">View Project</a></div>
-    <div class="card project"><div><h3>Wristband Detection & Location System</h3><p>Tracking prototype using Raspberry Pi, Node-RED, Django, APIs, and database storage to monitor service-user movement.</p><div class="tags"><span>Python</span><span>Django</span><span>Node-RED</span><span>Raspberry Pi</span></div></div><a class="btn" href="https://github.com/CB445/Team-Project.git" target="_blank">GitHub Repo</a></div>
-    <div class="card project"><div><h3>Turtle Graphics Drawing System</h3><p>Interactive Java OOP application that interprets commands to draw circles, angles, shapes, and geometric patterns.</p><div class="tags"><span>Java</span><span>OOP</span><span>LBUGraphics</span></div></div><a class="btn" href="https://github.com/OOP-2025-Classroom/oop-portfolio-2025-ositamichael.git" target="_blank">GitHub Repo</a></div>
-    <div class="card project"><div><h3>Django Database Management System</h3><p>Database-driven web application for storing and managing service-user records using Django admin, SQLite, and backend logic.</p><div class="tags"><span>Python</span><span>Django</span><span>SQLite</span><span>HTML</span></div></div><a class="btn" href="https://github.com/lbu-wat/wat-2025-ositamichael.git" target="_blank">GitHub Repo</a></div>
-    <div class="card project"><div><h3>Professional Portfolio Website</h3><p>Responsive portfolio website built to showcase projects, skills, education, professional development, and contact details.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div></div><a class="btn" href="https://ositamichael.github.io" target="_blank">Live Website</a></div>
+
+    <div class="card project">
+      <div>
+        <h3>Royal Store E-Commerce Website</h3>
+        <p>A live e-commerce style web project with product browsing and category pages, deployed using Netlify.</p>
+        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Netlify</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://stirring-meerkat-cffb86.netlify.app/" target="_blank">Live Demo</a>
+        <a class="btn" href="https://69c3595fe8d61a6217926965--stirring-meerkat-cffb86.netlify.app/products?category=thermal-bag" target="_blank">Product Page</a>
+      </div>
+    </div>
+
+    <div class="card project">
+      <div>
+        <h3>Portfolio Website</h3>
+        <p>Responsive personal portfolio project showcasing skills, education, projects, and contact details.</p>
+        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive Design</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://deluxe-mousse-089912.netlify.app/" target="_blank">Live Demo</a>
+      </div>
+    </div>
+
+    <div class="card project">
+      <div>
+        <h3>Wristband Detection & Location System</h3>
+        <p>Tracking prototype using Raspberry Pi, Node-RED, Django, APIs, and database storage to monitor service-user movement.</p>
+        <div class="tags"><span>Python</span><span>Django</span><span>Node-RED</span><span>Raspberry Pi</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://github.com/CB445/Team-Project.git" target="_blank">GitHub Repo</a>
+      </div>
+    </div>
+
+    <div class="card project">
+      <div>
+        <h3>Diabetes Prediction System</h3>
+        <p>Machine learning model to predict diabetes risk using real-world health data, preprocessing, feature engineering, and classification modelling.</p>
+        <div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Machine Learning</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn" href="#contact">Ask About Project</a>
+      </div>
+    </div>
+
+    <div class="card project">
+      <div>
+        <h3>Turtle Graphics Drawing System</h3>
+        <p>Interactive Java OOP application that interprets commands to draw circles, angles, shapes, and geometric patterns.</p>
+        <div class="tags"><span>Java</span><span>OOP</span><span>LBUGraphics</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://github.com/OOP-2025-Classroom/oop-portfolio-2025-ositamichael.git" target="_blank">GitHub Repo</a>
+      </div>
+    </div>
+
+    <div class="card project">
+      <div>
+        <h3>Django Database Management System</h3>
+        <p>Database-driven web application for storing and managing service-user records using Django admin, SQLite, and backend logic.</p>
+        <div class="tags"><span>Python</span><span>Django</span><span>SQLite</span><span>HTML</span></div>
+      </div>
+      <div class="project-actions">
+        <a class="btn primary" href="https://github.com/lbu-wat/wat-2025-ositamichael.git" target="_blank">GitHub Repo</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -337,9 +441,41 @@
   </div>
 </section>
 
+<section id="certificates">
+  <h2>Certificates.</h2>
+  <div class="certificate-card">
+    <div class="cert-box">
+      <h3>Computing & Engineering Showcase Representative</h3>
+      <p>Selected to represent BSc Computer Science at the Leeds Beckett University Computing and Engineering Showcase on 20 May 2026.</p>
+      <div class="tags"><span>Leeds Beckett University</span><span>Computer Science</span><span>Showcase</span></div>
+    </div>
+
+    <div class="cert-box">
+      <h3>i-UG Node-RED Education Course</h3>
+      <p>Completed the i-UG Node-RED education course and successfully addressed the Brewery Challenge.</p>
+      <div class="tags"><span>Node-RED</span><span>IoT</span><span>Automation</span></div>
+      <div class="project-actions">
+        <a class="btn primary" href="CamScanner 20-05-2026 17.26(1).pdf" target="_blank">View Certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="socials">
+  <h2>Links.</h2>
+  <div class="social-grid">
+    <a class="social" href="https://github.com/ositamichael001" target="_blank">GitHub</a>
+    <a class="social" href="https://www.linkedin.com/in/osita-michael-b4505b344" target="_blank">LinkedIn</a>
+    <a class="social" href="https://www.instagram.com/oficialmichaelroy?utm_source=qr" target="_blank">Instagram</a>
+    <a class="social" href="https://discord.gg/nSSbYDx2V" target="_blank">Discord</a>
+  </div>
+</section>
+
 <section id="objective">
   <h2>Objective.</h2>
-  <div class="card"><p>To secure a challenging role in software development or AI engineering where I can apply my technical skills, contribute to impactful projects, and grow professionally within the technology industry.</p></div>
+  <div class="card">
+    <p>To secure a challenging role in software development or AI engineering where I can apply my technical skills, contribute to impactful projects, and grow professionally within the technology industry.</p>
+  </div>
 </section>
 
 <section class="band contact" id="contact">
@@ -350,6 +486,7 @@
     <a class="btn" href="tel:07474254700">Call</a>
     <a class="btn" href="https://www.linkedin.com/in/osita-michael-b4505b344" target="_blank">LinkedIn</a>
     <a class="btn" href="https://github.com/ositamichael001" target="_blank">GitHub</a>
+    <a class="btn" href="https://www.instagram.com/oficialmichaelroy?utm_source=qr" target="_blank">Instagram</a>
   </div>
 </section>
 </main>
