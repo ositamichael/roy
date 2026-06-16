@@ -3,134 +3,493 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Osita Michael — Computer Science student at Leeds Beckett University. Portfolio, skills, projects, and contact links." />
-  <title>Osita Michael | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Osita Michael | Software Developer</title>
+  <meta name="description" content="Osita Michael - Software Developer, AI & Data Enthusiast based in Leeds, United Kingdom." />
+  <style>
+    :root {
+      --bg: #111214;
+      --card: #1b1d21;
+      --text: #f5f5f5;
+      --muted: #b9b1aa;
+      --accent: #d9a36a;
+      --line: rgba(255,255,255,.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(17,18,20,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      max-width: 1120px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: auto;
+      min-height: 82vh;
+      padding: 80px 20px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .tag {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .85rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.4rem);
+      line-height: .95;
+      letter-spacing: -4px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: clamp(2.3rem, 6vw, 4.6rem);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 690px;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      transition: .2s ease;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #171717;
+      border-color: var(--accent);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .profile-card {
+      background: linear-gradient(145deg, #23252a, #15161a);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.35);
+    }
+
+    .profile-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      background: #2a2c31;
+      display: block;
+    }
+
+    .initials {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #2a2c31, #0f1012);
+      display: grid;
+      place-items: center;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    section {
+      max-width: 1120px;
+      margin: auto;
+      padding: 80px 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    .summary-grid,
+    .skills-grid,
+    .experience-grid,
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .project-card {
+      min-height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .tech span {
+      font-size: .8rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(217,163,106,.12);
+      color: var(--accent);
+      border: 1px solid rgba(217,163,106,.2);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .summary-grid,
+      .skills-grid,
+      .experience-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <a class="logo" href="#home">Osita Michael</a>
-    <button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+  <header>
+    <nav>
+      <a class="logo" href="#">Osita Michael</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
   </header>
 
-  <nav class="menu" id="menu">
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <main id="home">
-    <section class="hero">
-      <div class="hero-content">
-        <p class="tag">Computer Science Student</p>
-        <h1>Hi, I'm Osita Michael</h1>
-        <p class="hero-text">
-          I am passionate about technology, software development, and the power of digital innovation to transform the world.
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="tag">Software Developer · AI & Data Enthusiast</div>
+        <h1>Building intelligent digital solutions.</h1>
+        <p>
+          Hi, I’m Osita Michael, a Computer Science student at Leeds Beckett University based in Leeds, United Kingdom.
+          I’m passionate about software development, artificial intelligence, data analysis, and building practical systems that solve real-world problems.
         </p>
-        <div class="hero-links">
-          <a href="#projects" class="pill primary">View Projects</a>
-          <a href="#contact" class="pill dark">Contact Me</a>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Contact Me</a>
+          <a class="btn" href="MICHAELOSITACV(2).pdf" target="_blank">Download CV</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <!-- Upload your image as profile.jpg in the same folder as index.html -->
+        <img class="profile-img" src="profile.jpg" alt="Osita Michael" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+        <div class="initials" style="display:none;">OM</div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About.</h2>
+      <div class="summary-grid">
+        <div class="card">
+          <h3>Technical Foundation</h3>
+          <p>A motivated and detail-oriented developer with a strong foundation in artificial intelligence, data analysis, and software engineering.</p>
+        </div>
+        <div class="card">
+          <h3>Practical Experience</h3>
+          <p>Experienced in building intelligent systems and developing real-world applications using modern programming tools and technologies.</p>
+        </div>
+        <div class="card">
+          <h3>Driven to Grow</h3>
+          <p>Passionate about solving complex problems, creating efficient solutions, and improving expertise in machine learning and full-stack development.</p>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section about-section">
-      <h2>About.</h2>
-      <p>
-        Hi, I'm Osita Michael, a Computer Science student at Leeds Beckett University, passionate about technology and its power to transform the world.
-      </p>
-      <p>
-        I am deeply enthusiastic about how technology is shaping our future — from automation to artificial intelligence and everything in between. I enjoy learning new tools and skills, exploring creative solutions, and understanding how things work under the hood.
-      </p>
-      <p>
-        I am driven by curiosity and the desire to build, explore, and contribute to impactful tech projects.
-      </p>
-      <div class="button-row">
-        <a class="button linkedin" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="button github" href="https://github.com/ositamichael001" target="_blank" rel="noopener">GitHub</a>
-        <a class="button resume" href="#contact">Connect</a>
-      </div>
-      <div class="photo-card">
-        <img src="me.jpg" alt="Osita Michael" onerror="this.src='https://via.placeholder.com/700x850/f0f0f0/222222?text=Add+me.jpg'" />
+    <section id="skills">
+      <h2>Skills.</h2>
+      <div class="skills-grid">
+        <div class="card">
+          <h3>Languages</h3>
+          <ul>
+            <li>Python</li>
+            <li>Java</li>
+            <li>JavaScript</li>
+            <li>SQL</li>
+            <li>C</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Technologies</h3>
+          <ul>
+            <li>Django</li>
+            <li>HTML5 & CSS3</li>
+            <li>SQLite</li>
+            <li>Node-RED</li>
+            <li>Raspberry Pi</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Tools & Interests</h3>
+          <ul>
+            <li>GitHub</li>
+            <li>VS Code</li>
+            <li>Eclipse & IntelliJ IDEA</li>
+            <li>Machine Learning</li>
+            <li>IoT Systems</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="education" class="section dark-section">
+    <section id="projects">
+      <h2>Featured Projects.</h2>
+      <div class="projects-grid">
+        <div class="card project-card">
+          <div>
+            <h3>Diabetes Prediction System</h3>
+            <p>Developed a machine learning model to predict diabetes risk using real-world health data, data preprocessing, feature engineering, and classification modelling.</p>
+            <div class="tech"><span>Python</span><span>Pandas</span><span>Scikit-learn</span></div>
+          </div>
+          <a class="btn" href="#" target="_blank">View Project</a>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <h3>Wristband Detection & Location System</h3>
+            <p>Built a prototype for tracking service-user movement with wristband detectors, Raspberry Pi, Node-RED, Django backend, APIs, and database storage.</p>
+            <div class="tech"><span>Python</span><span>Django</span><span>Node-RED</span><span>Raspberry Pi</span></div>
+          </div>
+          <a class="btn" href="https://github.com/CB445/Team-Project.git" target="_blank">GitHub Repo</a>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <h3>Turtle Graphics Drawing System</h3>
+            <p>Created an interactive Java OOP application that processes commands to draw shapes, circles, angles, and geometric patterns using LBUGraphics.</p>
+            <div class="tech"><span>Java</span><span>OOP</span><span>LBUGraphics</span></div>
+          </div>
+          <a class="btn" href="https://github.com/OOP-2025-Classroom/oop-portfolio-2025-ositamichael.git" target="_blank">GitHub Repo</a>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <h3>Django Database Management System</h3>
+            <p>Developed a database-driven web application for storing and managing service-user information with Django admin, SQLite, and backend models.</p>
+            <div class="tech"><span>Python</span><span>Django</span><span>SQLite</span><span>HTML</span></div>
+          </div>
+          <a class="btn" href="https://github.com/lbu-wat/wat-2025-ositamichael.git" target="_blank">GitHub Repo</a>
+        </div>
+
+        <div class="card project-card">
+          <div>
+            <h3>Professional Portfolio Website</h3>
+            <p>Designed and deployed a responsive personal portfolio website to showcase projects, technical skills, education, and development experience.</p>
+            <div class="tech"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub Pages</span></div>
+          </div>
+          <a class="btn" href="https://ositamichael.github.io" target="_blank">Live Website</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
       <h2>Education.</h2>
       <div class="card">
         <h3>Leeds Beckett University</h3>
-        <p>Computer Science Student</p>
-        <p>Focused on programming, software development, web technologies, problem solving, and modern computing concepts.</p>
+        <p class="muted">BSc (Hons) Computing / Software Engineering · 2024 – 2027</p>
+        <p>
+          A rigorous programme covering software development principles, data structures, algorithms,
+          AI fundamentals, database systems, and systems design.
+        </p>
       </div>
     </section>
 
-    <section id="experience" class="section light-section">
+    <section id="experience">
       <h2>Experience.</h2>
-      <p>
-        I am building my experience through university coursework, personal projects, coding practice, teamwork, and continuous learning.
-      </p>
-      <p>
-        I am currently strengthening my programming skills, exploring web development, AI, and cloud computing, while looking for opportunities to collaborate on exciting projects.
-      </p>
-    </section>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Junior Web Developer</h3>
+          <p class="muted">May 2024 – June 2024</p>
+          <p>Developed and maintained web applications, improved functionality, debugged errors, worked with databases, and improved user experience.</p>
+        </div>
 
-    <section id="projects" class="section dark-section">
-      <h2>Projects.</h2>
-      <div class="project-grid">
-        <article class="project-card">
-          <h3>Portfolio Website</h3>
-          <p>A personal website to showcase my profile, skills, projects, and contact information.</p>
-        </article>
-        <article class="project-card">
-          <h3>Web Development Practice</h3>
-          <p>Small websites and layouts built with HTML, CSS, and JavaScript to improve my frontend skills.</p>
-        </article>
-        <article class="project-card">
-          <h3>Programming Projects</h3>
-          <p>Coursework and personal coding projects focused on logic, problem solving, and software development.</p>
-        </article>
+        <div class="timeline-item">
+          <h3>IT Support Assistant</h3>
+          <p class="muted">Oct 2025 – Dec 2025</p>
+          <p>Troubleshot hardware and software issues, installed and configured applications, supported users, and helped improve system reliability.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>IoT Systems Developer</h3>
+          <p class="muted">Feb 2026 – Apr 2026</p>
+          <p>Configured Node-RED on Raspberry Pi, connected sensors and smart devices, processed real-time data, and built dashboards for monitoring.</p>
+        </div>
       </div>
     </section>
 
-    <section id="skills" class="section light-section">
-      <h2>Skills.</h2>
-      <div class="skills-list">
-        <span>Programming</span>
-        <span>Software Development</span>
-        <span>Web Technologies</span>
-        <span>Problem Solving</span>
-        <span>Learning New Technologies</span>
-        <span>Collaboration & Teamwork</span>
+    <section id="objective">
+      <h2>Career Objective.</h2>
+      <div class="card">
+        <p>
+          To secure a challenging role in software development or AI engineering where I can apply my technical skills,
+          contribute to impactful projects, and grow professionally within the technology industry.
+        </p>
       </div>
     </section>
 
-    <section id="goal" class="section dark-section">
-      <h2>Goal.</h2>
-      <p>
-        My goal is to use my knowledge and skills to create solutions, learn through experience, and enjoy the journey of becoming a better technologist.
-      </p>
-    </section>
-
-    <section id="contact" class="section contact-section">
-      <h2>Contact.</h2>
-      <p>I am always open to learning, collaboration, and tech conversations.</p>
+    <section id="contact" class="contact">
+      <h2>Get in Touch.</h2>
+      <p class="muted">Leeds, United Kingdom · Open to hybrid and remote roles</p>
       <div class="contact-links">
-        <a href="mailto:ositamichael001@gmail.com">ositamichael001@gmail.com</a>
-        <a href="https://github.com/ositamichael001" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://instagram.com/ositamichael001" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn primary" href="mailto:M.Osita9443@student.leedsbeckett.ac.uk">Email Me</a>
+        <a class="btn" href="tel:07474254700">Call</a>
+        <a class="btn" href="https://www.linkedin.com/in/osita-michael-b4505b344" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://github.com/ositamichael001" target="_blank">GitHub</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> Osita Michael. All rights reserved.</p>
+    <p>© 2026 Osita Michael. Built with HTML, CSS and JavaScript.</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
